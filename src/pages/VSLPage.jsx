@@ -359,7 +359,7 @@ const App = () => {
               <li className="flex items-start gap-3"><CheckCircle2 className="w-6 h-6 text-accent shrink-0" /> Underwriter-Ready Packet Checking</li>
               <li className="flex items-start gap-3"><CheckCircle2 className="w-6 h-6 text-accent shrink-0" /> Private Client Execution Portal</li>
             </ul>
-            <p className="text-4xl font-serif font-bold text-white mb-8">$2,500 - $3,000</p>
+            <p className="text-4xl font-serif font-bold text-white mb-8">$2,500</p>
             <button onClick={(e) => { e.preventDefault(); setIsQuizOpen(true); }} className="btn-magnetic bg-accent text-dark px-10 py-5 text-xl w-full sm:w-auto shadow-[0_0_40px_rgba(74,222,128,0.2)]">
               <span className="btn-bg bg-white"></span>
               <span className="relative z-10 font-bold group-hover:text-primary transition-colors cursor-pointer">BOOK STRATEGY SESSION NOW</span>
