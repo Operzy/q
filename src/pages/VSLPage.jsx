@@ -31,23 +31,21 @@ const App = () => {
   const navigate = useNavigate();
   const [isQuizOpen, setIsQuizOpen] = useState(false);
   const [step, setStep] = useState(1);
-  const [formState, setFormState] = useState({ funding: "", credit: "", invest: "" });
+  const [formState, setFormState] = useState({ funding: "", credit: "", invest: "", name: "", email: "", phone: "" });
 
   const handleNext = () => {
     if (step === 1 && formState.funding) setStep(2);
-    else if (step === 2 && formState.credit) {
+    else if (step === 2 && formState.credit) setStep(3);
+    else if (step === 3 && formState.invest) setStep(4);
+    else if (step === 4 && formState.name && formState.email && formState.phone) {
       if (formState.credit === "Below 620" || formState.credit === "620-679") {
         setIsQuizOpen(false);
         navigate('/credit-book');
-      } else {
-        setStep(3);
-      }
-    } else if (step === 3 && formState.invest) {
-      if (formState.invest === "Yes") {
+      } else if (formState.invest === "Yes") {
         setIsQuizOpen(false);
         navigate('/book');
       } else {
-        setStep(4);
+        setStep(5);
       }
     }
   };
@@ -419,11 +417,11 @@ const App = () => {
                 <XIcon className="w-5 h-5" />
               </button>
 
-              {step < 4 && (
+              {step < 5 && (
                 <div className="mb-8">
                   <div className="font-mono text-[10px] tracking-[0.2em] text-accent uppercase mb-4 flex items-center justify-center gap-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></div>
-                    Step 0{step} of 03
+                    Step 0{step} of 04
                   </div>
                   <h2 className="text-3xl md:text-4xl font-serif italic text-white tracking-tight mb-2 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">Application Assessment</h2>
                   <p className="text-white/60 text-sm md:text-base font-sans font-light">Takes 30 seconds. Determine your profile readiness immediately.</p>
@@ -507,6 +505,37 @@ const App = () => {
               )}
 
               {step === 4 && (
+                <div className="animate-[scaleIn_0.3s_ease-out]">
+                  <h4 className="font-sans text-xl md:text-2xl font-bold text-white mb-8 text-center leading-relaxed">
+                    Almost there! Where should we send your results?
+                  </h4>
+                  <div className="flex flex-col gap-4 max-w-sm mx-auto">
+                    <input 
+                      type="text" 
+                      placeholder="Full Name" 
+                      value={formState.name}
+                      onChange={(e) => setFormState({...formState, name: e.target.value})}
+                      className="w-full bg-white/5 border border-white/10 text-white rounded-2xl py-4 px-6 font-sans text-lg focus:outline-none focus:border-accent focus:bg-white/10 transition-all placeholder:text-white/30"
+                    />
+                    <input 
+                      type="email" 
+                      placeholder="Email Address" 
+                      value={formState.email}
+                      onChange={(e) => setFormState({...formState, email: e.target.value})}
+                      className="w-full bg-white/5 border border-white/10 text-white rounded-2xl py-4 px-6 font-sans text-lg focus:outline-none focus:border-accent focus:bg-white/10 transition-all placeholder:text-white/30"
+                    />
+                    <input 
+                      type="tel" 
+                      placeholder="Phone Number" 
+                      value={formState.phone}
+                      onChange={(e) => setFormState({...formState, phone: e.target.value})}
+                      className="w-full bg-white/5 border border-white/10 text-white rounded-2xl py-4 px-6 font-sans text-lg focus:outline-none focus:border-accent focus:bg-white/10 transition-all placeholder:text-white/30"
+                    />
+                  </div>
+                </div>
+              )}
+
+              {step === 5 && (
                 <div className="text-center py-16 animate-[scaleIn_0.3s_ease-out]">
                   <div className="w-20 h-20 bg-accent/10 border border-accent/20 rounded-full flex items-center justify-center mx-auto mb-8 shadow-[0_0_50px_rgba(74,222,128,0.15)]">
                     <CheckCircle2 className="w-10 h-10 text-accent" />
@@ -521,7 +550,7 @@ const App = () => {
             </div>
 
             {/* Bottom Navigation */}
-            {step < 4 && (
+            {step < 5 && (
               <div className="bg-black/40 border-t border-white/5 px-8 py-5 flex justify-between items-center relative z-10">
                 {step > 1 ? (
                   <button onClick={() => setStep(step - 1)} className="text-white/50 hover:text-white flex items-center gap-2 font-mono text-xs tracking-widest transition-colors uppercase">
@@ -533,12 +562,12 @@ const App = () => {
                   onClick={handleNext}
                   className={`
                       flex items-center gap-3 font-bold font-sans text-sm tracking-widest uppercase transition-all duration-300 px-8 py-4 rounded-xl border
-                      ${((step === 1 && !formState.funding) || (step === 2 && !formState.credit) || (step === 3 && !formState.invest))
+                      ${((step === 1 && !formState.funding) || (step === 2 && !formState.credit) || (step === 3 && !formState.invest) || (step === 4 && (!formState.name || !formState.email || !formState.phone)))
                       ? 'bg-white/5 border-transparent text-white/30 cursor-not-allowed'
                       : 'bg-accent text-dark border-accent shadow-[0_0_20px_rgba(74,222,128,0.2)] hover:shadow-[0_0_30px_rgba(74,222,128,0.4)] hover:bg-white hover:border-white'
                     }
                    `}
-                  disabled={(step === 1 && !formState.funding) || (step === 2 && !formState.credit) || (step === 3 && !formState.invest)}
+                  disabled={(step === 1 && !formState.funding) || (step === 2 && !formState.credit) || (step === 3 && !formState.invest) || (step === 4 && (!formState.name || !formState.email || !formState.phone))}
                 >
                   Continue <ArrowRight className="w-4 h-4" />
                 </button>

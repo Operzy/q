@@ -32,13 +32,13 @@ const BookingPage = () => {
          
          {/* Hero Title Area text */}
          <div className="text-center mb-16 pt-8">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-tight uppercase">
-               Book a call below with the <br className="hidden md:block"/>
-               <span className="text-accent drop-shadow-[0_0_20px_rgba(74,222,128,0.3)]">MyFundingApprove</span> Team
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-white mb-6 tracking-tight leading-[0.9]">
+               Book your <br className="hidden md:block"/>
+               <span className="font-serif italic font-normal text-accent block mt-2 drop-shadow-[0_0_20px_rgba(74,222,128,0.3)]">strategy session.</span>
             </h1>
             
             <p className="text-white/80 text-xl md:text-3xl font-bold font-sans max-w-2xl mx-auto leading-relaxed mt-10">
-               Please pick a time below for a call:
+               Please pick a time below to speak with our team:
             </p>
          </div>
 

@@ -49,9 +49,9 @@ const CreditBookingPage = () => {
 
          {/* Hero Title Area text */}
          <div className="text-center mb-16">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-white mb-6 tracking-tight leading-[0.9]">
                You Qualify for Our <br className="hidden md:block"/>
-               <span className="text-accent underline decoration-4 underline-offset-8 drop-shadow-[0_0_20px_rgba(74,222,128,0.3)]">Credit To Capital</span> Program
+               <span className="font-serif italic font-normal text-accent block mt-2 drop-shadow-[0_0_20px_rgba(74,222,128,0.3)]">Credit to Capital program.</span>
             </h1>
             
             <h3 className="text-xl md:text-2xl text-white/90 font-bold mb-6 font-sans">
