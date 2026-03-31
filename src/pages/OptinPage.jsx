@@ -1,0 +1,314 @@
+import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { CheckCircle2, ShieldCheck, Navigation, Zap, Play, Lock, ArrowRight, X as XIcon } from 'lucide-react';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const HERO_IMAGE_URL = "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?q=80&w=2600&auto=format&fit=crop"; 
+const LAPTOP_GLOW_IMG = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop";
+
+const OptinPage = () => {
+  const containerRef = useRef(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleOptInSubmit = (e) => {
+    e.preventDefault();
+    // Redirect user to the VSL page immediately after submit
+    navigate('/vsl');
+  };
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Hero text animations
+      gsap.fromTo(".hero-element", 
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power3.out", delay: 0.2 }
+      );
+
+      // Feature items stagger
+      gsap.fromTo(".feature-card",
+        { y: 60, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".feature-grid",
+            start: "top 80%",
+          }
+        }
+      );
+    }, containerRef);
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <div ref={containerRef} className="relative w-full overflow-x-hidden pt-0 mt-0">
+      <div className="noise-overlay"></div>
+      
+      {/* Cinematic Hero Section (Dark Theme) */}
+      <section className="hero-section relative min-h-[100dvh] flex items-center justify-center pt-16 pb-12 bg-dark">
+        <div className="absolute inset-0 z-0">
+          <img src={HERO_IMAGE_URL} alt="Architecture" className="w-full h-full object-cover opacity-20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-dark/90 via-dark/70 to-dark"></div>
+        </div>
+
+        <div className="container mx-auto px-4 z-10 grid lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-6 w-full text-center lg:text-left text-background">
+            <h2 className="hero-element text-sm md:text-base font-bold text-accent tracking-widest uppercase mb-4 flex items-center justify-center lg:justify-start gap-2">
+               <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span> Free Mini-Course
+            </h2>
+            <h1 className="hero-element text-4xl md:text-5xl lg:text-7xl font-bold font-sans leading-[1.1] mb-2 text-white">
+              Funding Training <span className="text-white">For Owners</span>
+            </h1>
+            <p className="hero-element text-3xl md:text-5xl lg:text-6xl font-serif italic text-white/90 mb-6">
+              Who Need Capital <span className="text-accent">Fast.</span>
+            </p>
+            <p className="hero-element text-lg md:text-xl text-white/70 max-w-xl mx-auto lg:mx-0 mb-10 font-sans leading-relaxed">
+              Learn the exact order to apply so you can qualify for <span className="text-white font-bold">$50K-$100K in 90-120 days</span>. Avoid the mistakes that get most founders denied.
+            </p>
+            
+            <div className="hero-element flex flex-col items-center lg:items-start gap-4">
+              <div className="flex items-center gap-4 text-white/60 text-sm font-mono mb-2 uppercase tracking-widest">
+                 <span className="line-through">Normally $997</span> <span className="text-accent font-bold">100% FREE TODAY</span>
+              </div>
+              <button onClick={() => setIsModalOpen(true)} className="btn-magnetic bg-accent text-dark px-10 py-5 text-xl tracking-tight md:text-2xl shadow-[0_0_40px_rgba(74,222,128,0.2)] w-full sm:w-auto text-center border-none rounded-xl">
+                <span className="btn-bg bg-white"></span>
+                <span className="relative z-10 font-bold transition-colors">YES! I WANT ACCESS NOW</span>
+              </button>
+            </div>
+            
+            <div className="hero-element mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-white/50 font-mono uppercase">
+              <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-accent" /> Readiness Score</span>
+              <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-accent" /> Approval Sequence</span>
+              <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-accent" /> 90-Day Plan</span>
+            </div>
+          </div>
+          
+          <div className="lg:col-span-6 flex justify-center perspective-[1000px] hero-element w-full mt-12 lg:mt-0">
+            <div className="relative w-full max-w-2xl transform rotate-y-[-5deg] hover:rotate-y-0 transition-transform duration-700 ease-out hidden lg:block group">
+               {/* 3D Mockup Container matching VSL */}
+               <div className="bg-dark/80 p-4 rounded-[2rem] border border-white/10 shadow-2xl backdrop-blur-xl relative">
+                 <div className="absolute -inset-4 bg-primary/20 blur-[80px] rounded-full z-[-1] opacity-50 group-hover:opacity-100 transition-opacity duration-700"></div>
+                 
+                 <div className="aspect-[16/10] bg-black rounded-[1rem] overflow-hidden relative">
+                    <img src={LAPTOP_GLOW_IMG} className="absolute inset-0 w-full h-full object-cover opacity-50" alt="Course preview" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-dark to-dark/40"></div>
+                    
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+                       <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mb-6 border border-accent/30 shadow-[0_0_30px_rgba(74,222,128,0.3)]">
+                          <Play className="w-8 h-8 text-accent fill-accent translate-x-0.5" />
+                       </div>
+                       <h3 className="text-white font-serif italic text-3xl md:text-4xl mb-4 leading-tight">"This Is Why Most Funding Applications Fail."</h3>
+                       <div className="text-accent font-mono text-xs tracking-widest uppercase">Lesson #3 • Business Funding Bootcamp</div>
+                    </div>
+                 </div>
+               </div>
+            </div>
+            {/* Mobile Fallback */}
+            <div className="lg:hidden w-full bg-dark/80 p-2 md:p-4 rounded-[1.5rem] border border-white/10 shadow-2xl backdrop-blur-xl relative">
+                <div className="absolute -inset-4 bg-primary/20 blur-[50px] rounded-full z-[-1]"></div>
+                <div className="aspect-[16/10] bg-black rounded-[1rem] overflow-hidden relative">
+                   <img src={LAPTOP_GLOW_IMG} className="absolute inset-0 w-full h-full object-cover opacity-50" alt="Course preview" />
+                   <div className="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
+                   <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+                      <Play className="w-12 h-12 text-accent fill-accent mb-4" />
+                      <h3 className="text-white font-serif italic text-2xl mb-2">"Why Most Applications Fail"</h3>
+                   </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* The Core Frameworks Section (Clean White) */}
+      <section className="py-24 bg-background relative z-10">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <h2 className="text-xs md:text-sm font-bold font-mono text-primary tracking-widest uppercase mb-4">What You'll Get Inside</h2>
+            <p className="text-4xl md:text-5xl font-sans font-bold text-dark mb-4">The Execution Tools.</p>
+            <p className="text-lg text-dark/60 font-serif italic text-2xl">Everything you need to secure funding without the guesswork.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 feature-grid">
+            
+            {/* Card 1: Funding Readiness */}
+            <div className="feature-card bg-white rounded-[2rem] p-8 shadow-xl border border-black/5 flex flex-col h-[420px] relative group hover:-translate-y-2 transition-transform duration-500 overflow-hidden">
+               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
+               <div className="flex-1 relative z-10">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-6">
+                     <ShieldCheck className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="font-bold text-2xl mb-3 text-dark font-sans tracking-tight">Funding Readiness</h3>
+                  <p className="text-dark/60 text-sm mb-8 leading-relaxed">Find out if you're ready to apply now and exactly what to fix first.</p>
+                  <div className="space-y-3 font-sans text-xs">
+                     <div className="flex items-center justify-between p-3 rounded-xl border border-black/5 bg-background group-hover:border-primary/20 transition-colors">
+                        <span className="text-dark/80 font-medium">750 Personal Credit</span>
+                        <CheckCircle2 className="w-4 h-4 text-accent" />
+                     </div>
+                     <div className="flex items-center justify-between p-3 rounded-xl border border-black/5 bg-background group-hover:border-primary/20 transition-colors">
+                        <span className="text-dark/80 font-medium opacity-50">High Credit Utilization</span>
+                        <div className="w-4 h-4 rounded-full bg-red-100 flex items-center justify-center"><div className="w-1.5 h-0.5 bg-red-500 rounded-full"></div></div>
+                     </div>
+                     <div className="flex items-center justify-between p-3 rounded-xl border border-black/5 bg-background group-hover:border-primary/20 transition-colors">
+                        <span className="text-dark/80 font-medium">Business Bank Setup</span>
+                        <CheckCircle2 className="w-4 h-4 text-accent" />
+                     </div>
+                  </div>
+               </div>
+               <div className="pt-6 mt-4 border-t border-black/5 flex justify-between items-center font-mono text-xs tracking-wider relative z-10">
+                  <span className="text-dark/40 uppercase">Tool 01</span>
+                  <span className="bg-primary/10 text-primary px-3 py-1 rounded-full font-bold">1-PAGE SCORECARD</span>
+               </div>
+            </div>
+
+            {/* Card 2: Approval Sequence */}
+            <div className="feature-card bg-dark rounded-[2rem] p-8 shadow-xl border border-white/10 flex flex-col h-[420px] relative group hover:-translate-y-2 transition-transform duration-500">
+               <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
+               <div className="flex-1 relative z-10">
+                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-6 border border-white/10">
+                     <Navigation className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="font-bold text-2xl mb-3 text-white font-sans tracking-tight">Approval Sequence</h3>
+                  <p className="text-white/60 text-sm mb-8 leading-relaxed">Learn the best order to apply so you avoid denials and compound your approvals.</p>
+                  <div className="relative pl-6 space-y-6 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-white/10">
+                     <div className="relative">
+                        <div className="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-accent border-4 border-dark"></div>
+                        <div className="text-white text-sm font-bold">Business Credit Line</div>
+                     </div>
+                     <div className="relative">
+                        <div className="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-white/20 border-4 border-dark"></div>
+                        <div className="text-white/70 text-sm">Business Credit Card</div>
+                     </div>
+                     <div className="relative">
+                        <div className="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-white/20 border-4 border-dark"></div>
+                        <div className="text-white/70 text-sm">Vehicle Financing</div>
+                     </div>
+                  </div>
+               </div>
+               <div className="pt-6 mt-4 border-t border-white/10 flex justify-between items-center font-mono text-xs tracking-wider relative z-10">
+                  <span className="text-white/40 uppercase">Tool 02</span>
+                  <span className="bg-white/10 text-white px-3 py-1 rounded-full font-bold">ORDER MATRIX</span>
+               </div>
+            </div>
+
+            {/* Card 3: 90-Day Plan */}
+            <div className="feature-card bg-white rounded-[2rem] p-8 shadow-xl border border-black/5 flex flex-col h-[420px] relative group hover:-translate-y-2 transition-transform duration-500 overflow-hidden">
+               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
+               <div className="flex-1 relative z-10">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-6">
+                     <Zap className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="font-bold text-2xl mb-3 text-dark font-sans tracking-tight">30-90 Day Plan</h3>
+                  <p className="text-dark/60 text-sm mb-8 leading-relaxed">Get a simple execution plan so you always know what your next move is.</p>
+                  <div className="grid grid-cols-3 gap-2 h-24">
+                     <div className="flex flex-col gap-2">
+                        <div className="bg-primary/5 rounded border border-primary/20 flex-1 flex items-center justify-center"><CheckCircle2 className="w-4 h-4 text-accent" /></div>
+                        <div className="bg-primary/5 rounded border border-primary/20 flex-1 flex items-center justify-center"><CheckCircle2 className="w-4 h-4 text-accent" /></div>
+                     </div>
+                     <div className="flex flex-col gap-2 opacity-60">
+                        <div className="bg-background rounded border border-black/10 flex-1 flex items-center justify-center"><Lock className="w-3 h-3 text-dark/40" /></div>
+                        <div className="bg-background rounded border border-black/10 flex-1 flex items-center justify-center"><Lock className="w-3 h-3 text-dark/40" /></div>
+                     </div>
+                     <div className="flex flex-col gap-2 opacity-30">
+                        <div className="bg-background rounded border border-black/10 flex-1 flex items-center justify-center"><Lock className="w-3 h-3 text-dark/40" /></div>
+                        <div className="bg-background rounded border border-black/10 flex-1 flex items-center justify-center"><Lock className="w-3 h-3 text-dark/40" /></div>
+                     </div>
+                  </div>
+               </div>
+               <div className="pt-6 mt-4 border-t border-black/5 flex justify-between items-center font-mono text-xs tracking-wider relative z-10">
+                  <span className="text-dark/40 uppercase">Tool 03</span>
+                  <span className="bg-primary/10 text-primary px-3 py-1 rounded-full font-bold">EXECUTION MAP</span>
+               </div>
+            </div>
+
+          </div>
+
+          <div className="mt-20 text-center feature-card">
+              <button onClick={() => setIsModalOpen(true)} className="btn-magnetic bg-primary text-white px-10 py-5 text-xl md:text-2xl shadow-xl inline-flex items-center gap-4 rounded-xl">
+                <span className="btn-bg bg-accent"></span>
+                <span className="relative z-10 font-bold group-hover:text-dark transition-colors font-sans tracking-tight">UNLOCK FREE ACCESS NOW</span>
+                <ArrowRight className="relative z-10 w-6 h-6 group-hover:text-dark transition-colors" />
+              </button>
+              <p className="text-dark/50 text-sm mt-4 font-mono uppercase tracking-widest"><Lock className="w-3 h-3 inline pb-0.5" /> Secure & Instant Delivery</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer Minimal */}
+      <footer className="bg-dark text-white/40 py-8 border-t border-white/10 text-center text-sm font-mono">
+         <div className="container mx-auto px-4">
+            © {new Date().getFullYear()} MyFundingApprove. All rights reserved.
+         </div>
+      </footer>
+
+      {/* Dynamic Pop-up Modal (Cinematic Premium Redesign) */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-dark/90 backdrop-blur-xl transition-opacity duration-500" onClick={() => setIsModalOpen(false)}></div>
+          
+          <div className="relative bg-[#0A0A14] border border-white/10 rounded-[2rem] w-full max-w-2xl shadow-[0_0_80px_rgba(0,0,0,0.8)] overflow-hidden animate-[scaleIn_0.4s_cubic-bezier(0.16,1,0.3,1)]">
+             {/* Glow Overlay */}
+             <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent"></div>
+             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop')] opacity-[0.03] pointer-events-none mix-blend-overlay"></div>
+             
+             {/* Header */}
+             <div className="pt-10 px-8 md:px-12 text-center relative z-10">
+                <button onClick={() => setIsModalOpen(false)} className="absolute top-6 right-6 text-white/30 hover:text-white transition-colors bg-white/5 hover:bg-white/10 rounded-full p-2">
+                  <XIcon className="w-5 h-5" />
+                </button>
+                
+                <h2 className="text-3xl md:text-5xl font-serif italic text-white tracking-tight mb-2 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">Where Should We Send</h2>
+                <h3 className="text-2xl md:text-3xl font-bold font-sans text-accent tracking-tighter uppercase mb-2 drop-shadow-sm">The Mini-Course?</h3>
+                <p className="text-white/60 text-sm md:text-base font-sans font-light mb-8 max-w-sm mx-auto">Fill out the form below to receive instant access to your free training and execution tools.</p>
+             </div>
+
+             {/* Content Area */}
+             <div className="bg-black/40 border-t border-white/5 px-8 py-8 md:px-12 relative z-10">
+                <form className="space-y-5" onSubmit={handleOptInSubmit}>
+                   <div>
+                      <label className="block text-xs font-bold text-white/70 mb-2 font-mono uppercase tracking-widest">Full Name <span className="text-accent text-sm">*</span></label>
+                      <input 
+                         type="text" 
+                         placeholder="Enter your full name" 
+                         className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-lg text-white outline-none focus:bg-white/10 focus:border-accent/50 focus:ring-4 focus:ring-accent/10 transition-all placeholder:text-white/20 font-sans backdrop-blur-md" 
+                         required 
+                      />
+                   </div>
+                   <div>
+                      <label className="block text-xs font-bold text-white/70 mb-2 font-mono uppercase tracking-widest">Phone <span className="text-accent text-sm">*</span></label>
+                      <input 
+                         type="tel" 
+                         placeholder="(555) 000-0000" 
+                         className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-lg text-white outline-none focus:bg-white/10 focus:border-accent/50 focus:ring-4 focus:ring-accent/10 transition-all placeholder:text-white/20 font-sans backdrop-blur-md" 
+                         required 
+                      />
+                   </div>
+                   <div>
+                      <label className="block text-xs font-bold text-white/70 mb-2 font-mono uppercase tracking-widest">Email <span className="text-accent text-sm">*</span></label>
+                      <input 
+                         type="email" 
+                         placeholder="you@company.com" 
+                         className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-lg text-white outline-none focus:bg-white/10 focus:border-accent/50 focus:ring-4 focus:ring-accent/10 transition-all placeholder:text-white/20 font-sans backdrop-blur-md" 
+                         required 
+                      />
+                   </div>
+                   
+                   <button type="submit" className="btn-magnetic bg-accent text-dark w-full py-5 text-xl mt-6 rounded-2xl border border-accent shadow-[0_0_20px_rgba(74,222,128,0.2)] hover:shadow-[0_0_30px_rgba(74,222,128,0.4)]">
+                      <span className="btn-bg bg-white"></span>
+                      <span className="relative z-10 font-bold group-hover:text-primary transition-colors font-sans tracking-widest uppercase">GET ACCESS NOW</span>
+                   </button>
+                   
+                   <p className="text-center text-[10px] text-white/30 font-sans mt-8 leading-relaxed max-w-xs mx-auto uppercase tracking-wide">
+                      By completing this form, I agree to having the course & bonuses sent to me and I agree to the terms & privacy policy of MyFundingApprove LLC.
+                   </p>
+                </form>
+             </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default OptinPage;
