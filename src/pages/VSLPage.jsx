@@ -121,34 +121,21 @@ const App = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-dark/90 via-dark/70 to-dark"></div>
         </div>
 
-        <div className="container mx-auto px-4 z-10 grid lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-6 w-full text-center lg:text-left text-background">
-            <h2 className="hero-element text-sm md:text-base font-bold text-accent tracking-widest uppercase mb-4">
-              For Founders Who Need Capital Fast
+        <div className="container mx-auto px-4 z-10 flex flex-col items-center text-center pb-8 pt-12 md:pb-0 md:pt-16">
+          <div className="w-full text-background max-w-5xl mb-12">
+            <h2 className="hero-element text-sm md:text-base font-bold text-accent tracking-widest uppercase mb-6 inline-block border border-accent/30 rounded-full px-6 py-2 bg-accent/5 backdrop-blur-sm shadow-[0_0_15px_rgba(74,222,128,0.1)]">
+              For Founders Who Need Capital Fast:
             </h2>
-            <h1 className="hero-element text-4xl md:text-5xl lg:text-6xl font-bold font-sans leading-tight mb-2">
-              Unlock up to <span className="text-accent underline decoration-2 underline-offset-8">$150K</span>
+            <h1 className="hero-element text-4xl md:text-5xl lg:text-[4rem] font-black font-sans leading-[1.1] mb-8 tracking-tighter uppercase">
+              Unlock up to <span className="text-accent underline decoration-4 underline-offset-8">$150K</span> in business funding with a proven system and step-by-step help
             </h1>
-            <p className="hero-element text-3xl md:text-5xl lg:text-6xl font-serif italic text-background/90 mb-6">
-              With a Proven System.
+            <p className="hero-element text-xl md:text-3xl text-white/80 font-serif italic max-w-4xl mx-auto leading-relaxed">
+              In 90 days or less, we guide you through a custom funding plan so you can move forward with confidence and protect your credit.
             </p>
-            <p className="hero-element text-lg md:text-xl text-background/70 max-w-xl mx-auto lg:mx-0 mb-8 font-sans">
-              In 90 days or less, we guide you through a custom funding plan so you can move forward with confidence and protect your credit. Completely guided step-by-step.
-            </p>
-            <div className="hero-element flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <button onClick={(e) => { e.preventDefault(); setIsQuizOpen(true); }} className="btn-magnetic bg-accent text-dark px-8 py-4 text-lg shadow-[0_0_30px_rgba(74,222,128,0.3)]">
-                <span className="btn-bg bg-primary"></span>
-                <span className="relative z-10 group-hover:text-white transition-colors">BOOK YOUR STRATEGY SESSION</span>
-              </button>
-            </div>
-            <div className="hero-element mt-6 flex items-center justify-center lg:justify-start gap-4 text-sm text-background/50 font-mono">
-              <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-accent" /> No wasted inquiries</span>
-              <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-accent" /> No blind applications</span>
-            </div>
           </div>
 
-          <div className="lg:col-span-6 flex justify-center perspective-[1000px] hero-element w-full">
-            <div className="relative w-full max-w-2xl transform rotate-y-[-5deg] hover:rotate-y-0 transition-transform duration-700 ease-out hidden lg:block">
+          <div className="w-full flex justify-center perspective-[1000px] hero-element mb-12">
+            <div className="relative w-full max-w-4xl transform rotate-y-[-2deg] hover:rotate-y-0 transition-transform duration-700 ease-out hidden lg:block">
               {/* 3D Mockup Container */}
               <div className="bg-dark/80 p-4 rounded-[2rem] border border-white/10 shadow-2xl backdrop-blur-xl">
                 <div className="aspect-[16/9] bg-black rounded-[1rem] overflow-hidden relative group">
@@ -163,7 +150,7 @@ const App = () => {
               </div>
             </div>
             {/* Mobile simplified view */}
-            <div className="lg:hidden w-full bg-dark/80 p-2 md:p-4 rounded-[1.5rem] border border-white/10 shadow-2xl backdrop-blur-xl">
+            <div className="lg:hidden w-full max-w-2xl bg-dark/80 p-2 md:p-4 rounded-[1.5rem] border border-white/10 shadow-2xl backdrop-blur-xl">
               <div className="aspect-[16/9] bg-black rounded-[1rem] overflow-hidden relative">
                 <iframe
                   src="https://player.vimeo.com/video/1157540125?h=2275a41cf7&title=0&byline=0&portrait=0"
@@ -173,6 +160,17 @@ const App = () => {
                   title="VSL"
                 ></iframe>
               </div>
+            </div>
+          </div>
+
+          <div className="hero-element flex flex-col items-center w-full">
+            <button onClick={(e) => { e.preventDefault(); setIsQuizOpen(true); }} className="btn-magnetic bg-accent text-dark px-10 py-5 text-xl shadow-[0_0_40px_rgba(74,222,128,0.3)] w-full sm:w-auto min-w-[320px]">
+              <span className="btn-bg bg-primary"></span>
+              <span className="relative z-10 group-hover:text-white transition-colors font-bold tracking-widest">BOOK YOUR STRATEGY SESSION</span>
+            </button>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm text-background/50 font-mono">
+              <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-accent" /> No wasted inquiries</span>
+              <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-accent" /> No blind applications</span>
             </div>
           </div>
         </div>
