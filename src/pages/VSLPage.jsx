@@ -201,7 +201,10 @@ const App = () => {
           <p className="phil-text-1 text-xl md:text-2xl font-sans text-white/60 mb-8 max-w-2xl mx-auto">
             Most business owners get denied because they apply the wrong way and in the wrong order. Banks don't approve people. They approve <span className="text-white font-bold">profiles</span>.
           </p>
-          <div className="w-px h-16 bg-gradient-to-b from-accent to-transparent mx-auto my-8"></div>
+          <div className="flex flex-col items-center my-8">
+            <div className="w-px h-10 md:h-14 bg-gradient-to-b from-transparent to-accent/60"></div>
+            <ChevronDown className="w-7 h-7 md:w-9 md:h-9 text-accent animate-bounce drop-shadow-[0_0_15px_rgba(74,222,128,0.6)]" strokeWidth={2.5} />
+          </div>
           <p className="phil-text-2 text-3xl md:text-5xl lg:text-7xl font-serif italic font-bold">
             The Capital Stack System™ <span className="text-accent">fixes that.</span>
           </p>
