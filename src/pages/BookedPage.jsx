@@ -80,7 +80,7 @@ const BookedPage = () => {
             </div>
 
             <h3 className="text-white font-bold text-xl md:text-2xl mb-3 tracking-tight">
-              Check Your Email
+              Click Add to Calendar on the email we sent you
             </h3>
             <p className="text-white/70 text-base leading-relaxed">
               We've sent you a confirmation email for your booking. Open it and click <span className="text-white font-bold">Add to Calendar</span> so the session is locked into your schedule.
@@ -109,7 +109,7 @@ const BookedPage = () => {
             </div>
 
             <h3 className="text-white font-bold text-xl md:text-2xl mb-3 tracking-tight">
-              Confirm By Text
+              Reply YES to confirm you'll join the appointment
             </h3>
             <p className="text-white/70 text-base leading-relaxed">
               We've just sent you an SMS. Please reply <span className="text-white font-bold">"YES"</span> to confirm you're going to attend your strategy session.
