@@ -38,7 +38,7 @@ export default async function handler(req, res) {
         email: email || undefined,
         phone: phone || undefined,
         source: 'Mini-Course Opt-In',
-        tags: ['mini-course-optin'],
+        tags: ['lead magnet downloaded (mini-course)'],
       }),
     });
 
