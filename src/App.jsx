@@ -5,6 +5,7 @@ import OptinPage from './pages/OptinPage';
 import BookingPage from './pages/BookingPage';
 import CreditBookingPage from './pages/CreditBookingPage';
 import QuizPage from './pages/QuizPage';
+import ThankYouPage from './pages/ThankYouPage';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/book" element={<BookingPage />} />
         <Route path="/credit-book" element={<CreditBookingPage />} />
         <Route path="/quiz" element={<QuizPage />} />
+        <Route path="/thank-you" element={<ThankYouPage />} />
       </Routes>
     </BrowserRouter>
   );

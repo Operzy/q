@@ -7,7 +7,7 @@ import { CheckCircle2, ShieldCheck, Navigation, Zap, Play, Lock, ArrowRight, X a
 gsap.registerPlugin(ScrollTrigger);
 
 const HERO_IMAGE_URL = "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?q=80&w=2600&auto=format&fit=crop"; 
-const LAPTOP_GLOW_IMG = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop";
+const LAPTOP_GLOW_IMG = "/coach-training-bg.png";
 
 const OptinPage = () => {
   const containerRef = useRef(null);
@@ -16,8 +16,8 @@ const OptinPage = () => {
 
   const handleOptInSubmit = (e) => {
     e.preventDefault();
-    // Redirect user to the VSL page immediately after submit
-    navigate('/vsl');
+    // Redirect user to the Thank You page immediately after submit
+    navigate('/thank-you');
   };
 
   useEffect(() => {
@@ -53,69 +53,66 @@ const OptinPage = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-dark/90 via-dark/70 to-dark"></div>
         </div>
 
-        <div className="container mx-auto px-4 z-10 grid lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-6 w-full text-center lg:text-left text-background">
-            <h2 className="hero-element text-sm md:text-base font-bold text-accent tracking-widest uppercase mb-4 flex items-center justify-center lg:justify-start gap-2">
-               <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span> Free Mini-Course
+        <div className="container mx-auto px-4 z-10 flex flex-col items-center text-center pb-8 pt-12 md:pb-0 md:pt-16">
+          <div className="w-full text-background max-w-5xl mb-12">
+            <h2 className="hero-element text-sm md:text-base font-bold text-accent tracking-widest uppercase mb-6 inline-block border border-accent/30 rounded-full px-6 py-2 bg-accent/5 backdrop-blur-sm shadow-[0_0_15px_rgba(74,222,128,0.1)]">
+              <span className="inline-block w-2 h-2 mr-2 rounded-full bg-accent animate-pulse"></span> Free Mini-Course
             </h2>
-            <h1 className="hero-element text-4xl md:text-5xl lg:text-7xl font-bold font-sans leading-[1.1] mb-2 text-white">
+            <h1 className="hero-element text-4xl md:text-5xl lg:text-[4rem] font-black font-sans leading-[1.1] mb-8 tracking-tighter uppercase whitespace-pre-wrap text-white">
               Funding Training <span className="text-white">For Owners</span>
+              <br className="hidden md:block"/> Who Need Capital <span className="text-accent italic font-serif lowercase drop-shadow-[0_0_20px_rgba(74,222,128,0.3)]">Fast.</span>
             </h1>
-            <p className="hero-element text-3xl md:text-5xl lg:text-6xl font-serif italic text-white/90 mb-6">
-              Who Need Capital <span className="text-accent">Fast.</span>
-            </p>
-            <p className="hero-element text-lg md:text-xl text-white/70 max-w-xl mx-auto lg:mx-0 mb-10 font-sans leading-relaxed">
+            <p className="hero-element text-xl md:text-3xl text-white/80 font-serif italic max-w-4xl mx-auto leading-relaxed mt-2">
               Learn the exact order to apply so you can qualify for <span className="text-white font-bold">$50K-$100K in 90-120 days</span>. Avoid the mistakes that get most founders denied.
             </p>
-            
-            <div className="hero-element flex flex-col items-center lg:items-start gap-4">
-              <div className="flex items-center gap-4 text-white/60 text-sm font-mono mb-2 uppercase tracking-widest">
-                 <span className="line-through">Normally $997</span> <span className="text-accent font-bold">100% FREE TODAY</span>
-              </div>
-              <button onClick={() => setIsModalOpen(true)} className="btn-magnetic bg-accent text-dark px-10 py-5 text-xl tracking-tight md:text-2xl shadow-[0_0_40px_rgba(74,222,128,0.2)] w-full sm:w-auto text-center border-none rounded-xl">
-                <span className="btn-bg bg-white"></span>
-                <span className="relative z-10 font-bold transition-colors">YES! I WANT ACCESS NOW</span>
-              </button>
-            </div>
-            
-            <div className="hero-element mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-white/50 font-mono uppercase">
-              <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-accent" /> Readiness Score</span>
-              <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-accent" /> Approval Sequence</span>
-              <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-accent" /> 90-Day Plan</span>
-            </div>
           </div>
-          
-          <div className="lg:col-span-6 flex justify-center perspective-[1000px] hero-element w-full mt-12 lg:mt-0">
-            <div className="relative w-full max-w-2xl transform rotate-y-[-5deg] hover:rotate-y-0 transition-transform duration-700 ease-out hidden lg:block group">
+
+          <div className="w-full flex justify-center perspective-[1000px] hero-element mb-12">
+            <div className="relative w-full max-w-4xl transform rotate-y-[-2deg] hover:rotate-y-0 transition-transform duration-700 ease-out hidden lg:block group cursor-pointer" onClick={() => setIsModalOpen(true)}>
                {/* 3D Mockup Container matching VSL */}
                <div className="bg-dark/80 p-4 rounded-[2rem] border border-white/10 shadow-2xl backdrop-blur-xl relative">
                  <div className="absolute -inset-4 bg-primary/20 blur-[80px] rounded-full z-[-1] opacity-50 group-hover:opacity-100 transition-opacity duration-700"></div>
                  
-                 <div className="aspect-[16/10] bg-black rounded-[1rem] overflow-hidden relative">
+                 <div className="aspect-[16/9] bg-black rounded-[1rem] overflow-hidden relative">
                     <img src={LAPTOP_GLOW_IMG} className="absolute inset-0 w-full h-full object-cover opacity-50" alt="Course preview" />
                     <div className="absolute inset-0 bg-gradient-to-t from-dark to-dark/40"></div>
                     
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                       <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mb-6 border border-accent/30 shadow-[0_0_30px_rgba(74,222,128,0.3)]">
-                          <Play className="w-8 h-8 text-accent fill-accent translate-x-0.5" />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-black/40 backdrop-blur-sm group-hover:bg-black/20 transition-colors duration-500">
+                       <div className="w-20 h-20 rounded-full bg-accent text-dark flex items-center justify-center mb-6 shadow-[0_0_50px_rgba(74,222,128,0.5)] transform scale-110 group-hover:scale-125 transition-transform duration-500">
+                          <Lock className="w-10 h-10" />
                        </div>
-                       <h3 className="text-white font-serif italic text-3xl md:text-4xl mb-4 leading-tight">"This Is Why Most Funding Applications Fail."</h3>
-                       <div className="text-accent font-mono text-xs tracking-widest uppercase">Lesson #3 • Business Funding Bootcamp</div>
+                       <h3 className="text-white font-sans font-black text-4xl md:text-5xl uppercase tracking-tighter mb-4 leading-tight group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all">Video Training Locked</h3>
+                       <div className="text-white/80 font-serif italic text-2xl group-hover:text-white transition-colors">Click to unlock the blueprint.</div>
                     </div>
                  </div>
                </div>
             </div>
             {/* Mobile Fallback */}
-            <div className="lg:hidden w-full bg-dark/80 p-2 md:p-4 rounded-[1.5rem] border border-white/10 shadow-2xl backdrop-blur-xl relative">
+            <div className="lg:hidden w-full max-w-2xl bg-dark/80 p-2 md:p-4 rounded-[1.5rem] border border-white/10 shadow-2xl backdrop-blur-xl relative cursor-pointer" onClick={() => setIsModalOpen(true)}>
                 <div className="absolute -inset-4 bg-primary/20 blur-[50px] rounded-full z-[-1]"></div>
-                <div className="aspect-[16/10] bg-black rounded-[1rem] overflow-hidden relative">
+                <div className="aspect-[16/9] bg-black rounded-[1rem] overflow-hidden relative">
                    <img src={LAPTOP_GLOW_IMG} className="absolute inset-0 w-full h-full object-cover opacity-50" alt="Course preview" />
                    <div className="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
-                   <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
-                      <Play className="w-12 h-12 text-accent fill-accent mb-4" />
-                      <h3 className="text-white font-serif italic text-2xl mb-2">"Why Most Applications Fail"</h3>
+                   <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center bg-black/40 backdrop-blur-sm">
+                      <Lock className="w-12 h-12 text-accent mb-4 drop-shadow-[0_0_20px_rgba(74,222,128,0.8)]" />
+                      <h3 className="text-white font-black text-2xl uppercase tracking-tighter mb-2">Training Locked</h3>
+                      <div className="text-white/80 font-serif italic text-sm">Tap to unlock</div>
                    </div>
                 </div>
+            </div>
+          </div>
+
+          <div className="hero-element flex flex-col items-center w-full">
+            <div className="flex items-center gap-4 text-white/80 text-sm md:text-base font-mono mb-6 uppercase tracking-widest bg-white/5 border border-white/10 px-6 py-2 rounded-full">
+               <span className="line-through opacity-60">Normally $997</span> <span className="text-accent font-bold drop-shadow-[0_0_10px_rgba(74,222,128,0.5)]">100% FREE TODAY</span>
+            </div>
+            
+            <button onClick={() => setIsModalOpen(true)} className="btn-magnetic bg-accent text-dark px-10 py-5 text-xl tracking-tight md:text-2xl shadow-[0_0_40px_rgba(74,222,128,0.3)] w-full sm:w-auto min-w-[320px] text-center rounded-xl">
+              <span className="btn-bg bg-white"></span>
+              <span className="relative z-10 font-bold group-hover:text-primary transition-colors tracking-widest uppercase">UNLOCK THE TRAINING NOW</span>
+            </button>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm text-background/50 font-mono">
+              <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-accent" /> Secure & Instant Delivery</span>
             </div>
           </div>
         </div>

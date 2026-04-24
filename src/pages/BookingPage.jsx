@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 import { Calendar } from 'lucide-react';
 
-const LOGO_URL = "/logo-CIo0yBvo.png";
-
 const BookingPage = () => {
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.src = 'https://link.msgsndr.com/js/form_embed.js';
     script.async = true;
     document.body.appendChild(script);
 
@@ -20,38 +18,35 @@ const BookingPage = () => {
   return (
     <div className="min-h-screen bg-[#0A0A14] flex flex-col items-center justify-start font-sans overflow-x-hidden relative">
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop')] opacity-[0.03] pointer-events-none mix-blend-overlay"></div>
-      
-      {/* Navbar/Header element */}
-      <div className="w-full relative z-10 flex justify-center pt-8 pb-12">
-          <div className="flex items-center">
-             <img src={LOGO_URL} alt="MyFundingApprove Logo" className="h-10 md:h-12 w-auto object-contain drop-shadow-lg" />
-          </div>
-      </div>
 
-      <div className="max-w-4xl mx-auto px-4 w-full relative z-10 animate-[scaleIn_0.4s_ease-out]">
+      <div className="max-w-4xl mx-auto px-4 w-full relative z-10 animate-[scaleIn_0.4s_ease-out] pt-12 md:pt-20">
          
          {/* Hero Title Area text */}
-         <div className="text-center mb-16 pt-8">
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-white mb-6 tracking-tight leading-[0.9]">
-               Book your <br className="hidden md:block"/>
-               <span className="font-serif italic font-normal text-accent block mt-2 drop-shadow-[0_0_20px_rgba(74,222,128,0.3)]">strategy session.</span>
+         <div className="text-center mb-12">
+            <div className="font-mono text-sm tracking-[0.2em] text-accent uppercase mb-6 flex items-center justify-center gap-3">
+              <div className="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_10px_rgba(74,222,128,0.8)]"></div>
+              You Are Qualified
+            </div>
+            <h1 className="text-5xl md:text-6xl lg:text-[5rem] font-black font-sans text-white mb-8 tracking-tighter leading-none uppercase">
+               Secure Your <br className="hidden md:block"/>
+               <span className="font-serif italic font-normal text-accent block mt-4 drop-shadow-[0_0_30px_rgba(74,222,128,0.4)] lowercase">Strategy Session</span>
             </h1>
             
-            <p className="text-white/80 text-xl md:text-3xl font-bold font-sans max-w-2xl mx-auto leading-relaxed mt-10">
-               Please pick a time below to speak with our team:
+            <p className="text-white/70 text-lg md:text-2xl font-sans max-w-2xl mx-auto leading-relaxed border-t border-white/10 pt-8">
+               Select a time below to map out your <strong className="text-white font-bold">Custom Funding Blueprint</strong> with our lead strategists.
             </p>
          </div>
 
-         {/* Calendly Embed */}
-         <div className="bg-black/60 rounded-[2rem] shadow-[0_0_50px_rgba(0,0,0,0.8)] border border-white/10 flex flex-col items-center justify-center relative overflow-hidden group mt-12 mb-24 backdrop-blur-xl">
+         {/* LeadConnector Booking Embed */}
+         <div className="bg-white/5 rounded-[2rem] shadow-[0_30px_100px_rgba(0,0,0,0.8)] border border-white/10 flex flex-col items-center justify-center relative overflow-hidden group mt-8 mb-24 backdrop-blur-xl p-2 md:p-8">
              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent"></div>
-             
-             {/* Themed widget iframe injection point */}
-             <div className="w-full h-[700px] relative z-10 p-2 md:p-8">
-                 <div 
-                   className="calendly-inline-widget w-full h-full rounded-2xl" 
-                   data-url="https://calendly.com/qsumrall-creditdisputecloud/business-funding-discovery-call?hide_gdpr_banner=1&background_color=0a0a14&text_color=ffffff&primary_color=4ade80"
-                 ></div>
+             <div className="w-full relative z-10 w-full min-h-[700px]">
+                 <iframe 
+                   src="https://api.leadconnectorhq.com/widget/booking/FahB7qhPb0tgPGNhYwG7" 
+                   style={{ width: "100%", border: "none", overflow: "hidden", minHeight: "700px" }} 
+                   scrolling="no" 
+                   id="FahB7qhPb0tgPGNhYwG7_1777047578034"
+                 ></iframe>
              </div>
          </div>
       </div>
