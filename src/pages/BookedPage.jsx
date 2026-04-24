@@ -71,10 +71,10 @@ const BookedPage = () => {
               </div>
             </div>
 
-            <div className="rounded-[1.25rem] overflow-hidden aspect-[4/3] relative border border-white/10 shadow-xl mb-6 bg-white flex items-center justify-center p-6">
+            <div className="rounded-[1.25rem] overflow-hidden aspect-[4/3] relative border border-white/10 shadow-xl mb-6 bg-white">
               <img
                 src="/booked-step-email.png"
-                className="max-w-full max-h-full object-contain"
+                className="absolute inset-0 w-full h-full object-cover object-left-top"
                 alt="Confirmation email showing Add to Calendar button"
               />
             </div>
