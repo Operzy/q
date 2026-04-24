@@ -13,8 +13,24 @@ const OptinPage = () => {
   const containerRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', phone: '', email: '' });
+  const [utms, setUtms] = useState({ utm_source: '', utm_medium: '', utm_campaign: '' });
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    let stored = {};
+    try { stored = JSON.parse(sessionStorage.getItem('utms') || '{}'); } catch { /* noop */ }
+    const captured = {
+      utm_source: params.get('utm_source') || stored.utm_source || '',
+      utm_medium: params.get('utm_medium') || stored.utm_medium || '',
+      utm_campaign: params.get('utm_campaign') || stored.utm_campaign || '',
+    };
+    setUtms(captured);
+    if (params.has('utm_source') || params.has('utm_medium') || params.has('utm_campaign')) {
+      sessionStorage.setItem('utms', JSON.stringify(captured));
+    }
+  }, []);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -29,7 +45,7 @@ const OptinPage = () => {
       await fetch('/api/ghl-contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, ...utms }),
       });
     } catch (err) {
       console.error('Opt-in submit failed', err);

@@ -4,7 +4,14 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { name = '', email = '', phone = '' } = req.body || {};
+  const {
+    name = '',
+    email = '',
+    phone = '',
+    utm_source = '',
+    utm_medium = '',
+    utm_campaign = '',
+  } = req.body || {};
 
   if (!email && !phone) {
     return res.status(400).json({ error: 'email or phone required' });
@@ -39,6 +46,14 @@ export default async function handler(req, res) {
         phone: phone || undefined,
         source: 'Mini-Course Opt-In',
         tags: ['lead magnet downloaded (mini-course)'],
+        attributionSource: (utm_source || utm_medium || utm_campaign)
+          ? {
+              url: req.headers.referer || undefined,
+              utmSource: utm_source || undefined,
+              medium: utm_medium || undefined,
+              campaign: utm_campaign || undefined,
+            }
+          : undefined,
       }),
     });
 
