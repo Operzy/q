@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Mail, PlayCircle } from 'lucide-react';
+import { ChevronDown, Mail, PlayCircle } from 'lucide-react';
 
 const LOGO_URL = "/logo-CIo0yBvo.png";
 
@@ -64,6 +64,14 @@ const ThankYouPage = () => {
                     </div>
                  </div>
               </div>
+           </div>
+        </div>
+
+        {/* Flow connector to Clear Path */}
+        <div className="flex flex-col items-center -mt-8 mb-12">
+           <div className="w-px h-10 bg-gradient-to-b from-transparent to-accent/40"></div>
+           <div className="w-12 h-12 md:w-14 md:h-14 rounded-full border border-accent/30 bg-accent/10 backdrop-blur-sm flex items-center justify-center shadow-[0_0_25px_rgba(74,222,128,0.2)] animate-bounce">
+              <ChevronDown className="w-6 h-6 md:w-7 md:h-7 text-accent" strokeWidth={2.5} />
            </div>
         </div>
 
