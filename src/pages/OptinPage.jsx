@@ -12,11 +12,29 @@ const LAPTOP_GLOW_IMG = "/coach-training-bg.png";
 const OptinPage = () => {
   const containerRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '' });
+  const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
 
-  const handleOptInSubmit = (e) => {
+  const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleOptInSubmit = async (e) => {
     e.preventDefault();
-    // Redirect user to the Thank You page immediately after submit
+    if (submitting) return;
+    setSubmitting(true);
+
+    try {
+      await fetch('/api/ghl-contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+    } catch (err) {
+      console.error('Opt-in submit failed', err);
+    }
+
     navigate('/thank-you');
   };
 
@@ -265,35 +283,44 @@ const OptinPage = () => {
                 <form className="space-y-5" onSubmit={handleOptInSubmit}>
                    <div>
                       <label className="block text-xs font-bold text-white/70 mb-2 font-mono uppercase tracking-widest">Full Name <span className="text-accent text-sm">*</span></label>
-                      <input 
-                         type="text" 
-                         placeholder="Enter your full name" 
-                         className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-lg text-white outline-none focus:bg-white/10 focus:border-accent/50 focus:ring-4 focus:ring-accent/10 transition-all placeholder:text-white/20 font-sans backdrop-blur-md" 
-                         required 
+                      <input
+                         type="text"
+                         name="name"
+                         value={formData.name}
+                         onChange={handleChange}
+                         placeholder="Enter your full name"
+                         className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-lg text-white outline-none focus:bg-white/10 focus:border-accent/50 focus:ring-4 focus:ring-accent/10 transition-all placeholder:text-white/20 font-sans backdrop-blur-md"
+                         required
                       />
                    </div>
                    <div>
                       <label className="block text-xs font-bold text-white/70 mb-2 font-mono uppercase tracking-widest">Phone <span className="text-accent text-sm">*</span></label>
-                      <input 
-                         type="tel" 
-                         placeholder="(555) 000-0000" 
-                         className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-lg text-white outline-none focus:bg-white/10 focus:border-accent/50 focus:ring-4 focus:ring-accent/10 transition-all placeholder:text-white/20 font-sans backdrop-blur-md" 
-                         required 
+                      <input
+                         type="tel"
+                         name="phone"
+                         value={formData.phone}
+                         onChange={handleChange}
+                         placeholder="(555) 000-0000"
+                         className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-lg text-white outline-none focus:bg-white/10 focus:border-accent/50 focus:ring-4 focus:ring-accent/10 transition-all placeholder:text-white/20 font-sans backdrop-blur-md"
+                         required
                       />
                    </div>
                    <div>
                       <label className="block text-xs font-bold text-white/70 mb-2 font-mono uppercase tracking-widest">Email <span className="text-accent text-sm">*</span></label>
-                      <input 
-                         type="email" 
-                         placeholder="you@company.com" 
-                         className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-lg text-white outline-none focus:bg-white/10 focus:border-accent/50 focus:ring-4 focus:ring-accent/10 transition-all placeholder:text-white/20 font-sans backdrop-blur-md" 
-                         required 
+                      <input
+                         type="email"
+                         name="email"
+                         value={formData.email}
+                         onChange={handleChange}
+                         placeholder="you@company.com"
+                         className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-lg text-white outline-none focus:bg-white/10 focus:border-accent/50 focus:ring-4 focus:ring-accent/10 transition-all placeholder:text-white/20 font-sans backdrop-blur-md"
+                         required
                       />
                    </div>
-                   
-                   <button type="submit" className="btn-magnetic bg-accent text-dark w-full py-5 text-xl mt-6 rounded-2xl border border-accent shadow-[0_0_20px_rgba(74,222,128,0.2)] hover:shadow-[0_0_30px_rgba(74,222,128,0.4)]">
+
+                   <button type="submit" disabled={submitting} className="btn-magnetic bg-accent text-dark w-full py-5 text-xl mt-6 rounded-2xl border border-accent shadow-[0_0_20px_rgba(74,222,128,0.2)] hover:shadow-[0_0_30px_rgba(74,222,128,0.4)] disabled:opacity-70 disabled:cursor-not-allowed">
                       <span className="btn-bg bg-white"></span>
-                      <span className="relative z-10 font-bold group-hover:text-primary transition-colors font-sans tracking-widest uppercase">GET ACCESS NOW</span>
+                      <span className="relative z-10 font-bold group-hover:text-primary transition-colors font-sans tracking-widest uppercase">{submitting ? 'Sending...' : 'GET ACCESS NOW'}</span>
                    </button>
                    
                    <p className="text-center text-[10px] text-white/30 font-sans mt-8 leading-relaxed max-w-xs mx-auto uppercase tracking-wide">
