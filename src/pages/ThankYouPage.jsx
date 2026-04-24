@@ -23,9 +23,14 @@ const ThankYouPage = () => {
             <Mail className="w-5 h-5 text-accent" />
             Thank you! The Mini-Course Has Been Emailed to You!
           </div>
-          <button className="bg-accent/10 border border-accent text-accent px-6 py-2 rounded-lg font-bold text-sm hover:bg-accent hover:text-dark transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(74,222,128,0.2)]">
+          <a
+            href="https://malleable-breeze-a9f.notion.site/Start-Here-Watch-this-first-2e82dbe319c08033875bd5e62c11d328"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-accent/10 border border-accent text-accent px-6 py-2 rounded-lg font-bold text-sm hover:bg-accent hover:text-dark transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(74,222,128,0.2)]"
+          >
             <PlayCircle className="w-4 h-4" /> Access Mini-Course
-          </button>
+          </a>
         </div>
       </div>
 
