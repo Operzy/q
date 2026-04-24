@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ShieldCheck, Anchor, Crosshair, Map, Navigation, BarChart, Server, Fingerprint, Activity, Clock, Zap, CheckCircle2, X as XIcon, ArrowRight, ArrowLeft } from 'lucide-react';
+import { ShieldCheck, Anchor, Crosshair, Map, Navigation, BarChart, Server, Fingerprint, Activity, Clock, Zap, CheckCircle2, ChevronDown, X as XIcon, ArrowRight, ArrowLeft } from 'lucide-react';
 
 const YoutubeIcon = (props) => (
   <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -115,21 +115,21 @@ const App = () => {
 
 
       {/* Hero Section */}
-      <section className="hero-section relative min-h-[100dvh] flex items-center justify-center pt-24 pb-12 bg-dark">
+      <section className="hero-section relative min-h-[100dvh] flex items-center justify-center pt-6 md:pt-24 pb-6 md:pb-12 bg-dark">
         <div className="absolute inset-0 z-0">
           <img src={HERO_IMAGE_URL} alt="Architecture" className="w-full h-full object-cover opacity-20" />
           <div className="absolute inset-0 bg-gradient-to-b from-dark/90 via-dark/70 to-dark"></div>
         </div>
 
-        <div className="container mx-auto px-4 z-10 flex flex-col items-center text-center pb-8 pt-12 md:pb-0 md:pt-16">
-          <div className="w-full text-background max-w-5xl mb-12">
-            <h2 className="hero-element text-sm md:text-base font-bold text-accent tracking-widest uppercase mb-6 inline-block border border-accent/30 rounded-full px-6 py-2 bg-accent/5 backdrop-blur-sm shadow-[0_0_15px_rgba(74,222,128,0.1)]">
+        <div className="container mx-auto px-4 z-10 flex flex-col items-center text-center pb-4 pt-4 md:pb-0 md:pt-16">
+          <div className="w-full text-background max-w-5xl mb-6 md:mb-12">
+            <h2 className="hero-element text-xs sm:text-sm md:text-base font-bold text-accent tracking-widest uppercase mb-4 md:mb-6 inline-block border border-accent/30 rounded-full px-4 md:px-6 py-2 bg-accent/5 backdrop-blur-sm shadow-[0_0_15px_rgba(74,222,128,0.1)]">
               For Founders Who Need Capital Fast:
             </h2>
-            <h1 className="hero-element text-4xl md:text-5xl lg:text-[4rem] font-black font-sans leading-[1.1] mb-8 tracking-tighter uppercase">
-              Unlock up to <span className="text-accent underline decoration-4 underline-offset-8">$150K</span> in business funding with a proven system and step-by-step help
+            <h1 className="hero-element text-4xl md:text-5xl lg:text-[4rem] font-black font-sans leading-[1.15] md:leading-[1.1] mb-4 md:mb-8 tracking-tighter uppercase">
+              Unlock up to <span className="text-accent underline decoration-2 underline-offset-4 md:decoration-4 md:underline-offset-8">$150K</span> in business funding with a proven system and step-by-step help
             </h1>
-            <p className="hero-element text-xl md:text-3xl text-white/80 font-serif italic max-w-4xl mx-auto leading-relaxed">
+            <p className="hero-element text-base md:text-3xl text-white/90 md:text-white/80 font-sans md:font-serif md:italic max-w-4xl mx-auto leading-relaxed">
               In 90 days or less, we guide you through a custom funding plan so you can move forward with confidence and protect your credit.
             </p>
           </div>
@@ -300,23 +300,23 @@ const App = () => {
                  </div>
 
                  {/* Social Proof Metrics */}
-                 <div className="mt-12 flex flex-wrap items-center gap-6">
-                    <div className="flex items-center gap-4 bg-black/5 border border-black/5 backdrop-blur-sm rounded-2xl px-6 py-4 hover:border-black/10 transition-colors group">
-                       <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/20 group-hover:bg-red-500/20 transition-colors">
-                          <YoutubeIcon className="w-5 h-5 text-red-500 group-hover:scale-110 transition-transform" />
+                 <div className="mt-12 grid grid-cols-2 gap-3 md:gap-6">
+                    <div className="flex items-center gap-3 md:gap-4 bg-black/5 border border-black/5 backdrop-blur-sm rounded-2xl px-3 md:px-6 py-3 md:py-4 hover:border-black/10 transition-colors group">
+                       <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/20 group-hover:bg-red-500/20 transition-colors shrink-0">
+                          <YoutubeIcon className="w-4 h-4 md:w-5 md:h-5 text-red-500 group-hover:scale-110 transition-transform" />
                        </div>
-                       <div className="font-sans">
-                          <div className="font-black text-dark text-2xl leading-none mb-1 tracking-tighter">193k+</div>
+                       <div className="font-sans min-w-0">
+                          <div className="font-black text-dark text-xl md:text-2xl leading-none mb-1 tracking-tighter">193k+</div>
                           <div className="text-[10px] text-dark/40 uppercase tracking-widest font-bold">Subscribers</div>
                        </div>
                     </div>
-                    
-                    <div className="flex items-center gap-4 bg-black/5 border border-black/5 backdrop-blur-sm rounded-2xl px-6 py-4 hover:border-black/10 transition-colors group">
-                       <div className="w-12 h-12 rounded-full bg-pink-500/10 flex items-center justify-center border border-pink-500/20 group-hover:bg-pink-500/20 transition-colors">
-                          <InstagramIcon className="w-5 h-5 text-pink-500 group-hover:scale-110 transition-transform" />
+
+                    <div className="flex items-center gap-3 md:gap-4 bg-black/5 border border-black/5 backdrop-blur-sm rounded-2xl px-3 md:px-6 py-3 md:py-4 hover:border-black/10 transition-colors group">
+                       <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-pink-500/10 flex items-center justify-center border border-pink-500/20 group-hover:bg-pink-500/20 transition-colors shrink-0">
+                          <InstagramIcon className="w-4 h-4 md:w-5 md:h-5 text-pink-500 group-hover:scale-110 transition-transform" />
                        </div>
-                       <div className="font-sans">
-                          <div className="font-black text-dark text-2xl leading-none mb-1 tracking-tighter">82k+</div>
+                       <div className="font-sans min-w-0">
+                          <div className="font-black text-dark text-xl md:text-2xl leading-none mb-1 tracking-tighter">82k+</div>
                           <div className="text-[10px] text-dark/40 uppercase tracking-widest font-bold">Followers</div>
                        </div>
                     </div>
@@ -659,11 +659,8 @@ const TypewriterCard = () => {
 
   return (
     <div className="feature-card bg-dark text-white rounded-[2rem] p-8 shadow-xl border border-white/10 flex flex-col h-[400px] relative group hover:-translate-y-2 transition-transform duration-300">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex items-center mb-6">
         <h3 className="font-bold text-xl text-white font-sans">The Stack Order Matrix™</h3>
-        <div className="flex items-center gap-2 text-xs font-mono text-accent bg-accent/10 px-3 py-1 rounded-full">
-          <div className="w-2 h-2 rounded-full bg-accent animate-pulse"></div> Live Feed
-        </div>
       </div>
       <p className="text-white/60 text-sm mb-6 leading-relaxed flex-1">Build the exact application order so approvals compound instead of collapsing your profile.</p>
 
@@ -819,12 +816,10 @@ const CounterSection = () => {
       </div>
 
       {/* Flowing connector pointing to the next section */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center justify-end h-40 md:h-56 z-20">
-        <span className="font-mono text-[10px] md:text-xs text-white/40 uppercase tracking-[0.3em] mb-4 text-center">But Here Is The Reality</span>
-        <div className="w-px h-16 md:h-24 bg-gradient-to-b from-accent to-transparent relative">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 border-b-2 border-r-2 border-accent rotate-45 translate-y-[-50%] animate-pulse drop-shadow-[0_0_10px_rgba(74,222,128,0.8)]"></div>
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 w-4 h-4 border-b-2 border-r-2 border-white/50 rotate-45 translate-y-[-50%] animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-        </div>
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center justify-end h-32 md:h-56 z-20">
+        <span className="font-mono text-[10px] md:text-xs text-white/40 uppercase tracking-[0.3em] mb-3 md:mb-4 text-center">But Here Is The Reality</span>
+        <div className="w-px h-10 md:h-16 bg-gradient-to-b from-transparent to-accent/60"></div>
+        <ChevronDown className="w-7 h-7 md:w-9 md:h-9 text-accent animate-bounce drop-shadow-[0_0_15px_rgba(74,222,128,0.6)]" strokeWidth={2.5} />
       </div>
     </section>
   );

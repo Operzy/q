@@ -81,27 +81,27 @@ const OptinPage = () => {
       <div className="noise-overlay"></div>
       
       {/* Cinematic Hero Section (Dark Theme) */}
-      <section className="hero-section relative min-h-[100dvh] flex items-center justify-center pt-16 pb-12 bg-dark">
+      <section className="hero-section relative min-h-[100dvh] flex items-center justify-center pt-6 md:pt-16 pb-6 md:pb-12 bg-dark">
         <div className="absolute inset-0 z-0">
           <img src={HERO_IMAGE_URL} alt="Architecture" className="w-full h-full object-cover opacity-20" />
           <div className="absolute inset-0 bg-gradient-to-b from-dark/90 via-dark/70 to-dark"></div>
         </div>
 
-        <div className="container mx-auto px-4 z-10 flex flex-col items-center text-center pb-8 pt-12 md:pb-0 md:pt-16">
-          <div className="w-full text-background max-w-5xl mb-12">
-            <h2 className="hero-element text-sm md:text-base font-bold text-accent tracking-widest uppercase mb-6 inline-block border border-accent/30 rounded-full px-6 py-2 bg-accent/5 backdrop-blur-sm shadow-[0_0_15px_rgba(74,222,128,0.1)]">
+        <div className="container mx-auto px-4 z-10 flex flex-col items-center text-center pb-4 pt-2 md:pb-0 md:pt-16">
+          <div className="w-full text-background max-w-5xl mb-4 md:mb-12">
+            <h2 className="hero-element text-xs sm:text-sm md:text-base font-bold text-accent tracking-widest uppercase mb-3 md:mb-6 inline-block border border-accent/30 rounded-full px-4 md:px-6 py-2 bg-accent/5 backdrop-blur-sm shadow-[0_0_15px_rgba(74,222,128,0.1)]">
               <span className="inline-block w-2 h-2 mr-2 rounded-full bg-accent animate-pulse"></span> Free Mini-Course
             </h2>
-            <h1 className="hero-element text-4xl md:text-5xl lg:text-[4rem] font-black font-sans leading-[1.1] mb-8 tracking-tighter uppercase whitespace-pre-wrap text-white">
+            <h1 className="hero-element text-3xl md:text-5xl lg:text-[4rem] font-black font-sans leading-[1.1] mb-3 md:mb-8 tracking-tighter uppercase whitespace-pre-wrap text-white">
               Funding Training <span className="text-white">For Owners</span>
               <br className="hidden md:block"/> Who Need Capital <span className="text-accent italic font-serif lowercase drop-shadow-[0_0_20px_rgba(74,222,128,0.3)]">Fast.</span>
             </h1>
-            <p className="hero-element text-xl md:text-3xl text-white/80 font-serif italic max-w-4xl mx-auto leading-relaxed mt-2">
+            <p className="hero-element text-base md:text-3xl text-white/90 md:text-white/80 font-sans md:font-serif md:italic max-w-4xl mx-auto leading-relaxed mt-2">
               Learn the exact order to apply so you can qualify for <span className="text-white font-bold">$50K-$100K in 90-120 days</span>. Avoid the mistakes that get most founders denied.
             </p>
           </div>
 
-          <div className="w-full flex justify-center perspective-[1000px] hero-element mb-12">
+          <div className="w-full flex justify-center perspective-[1000px] hero-element mb-4 md:mb-12">
             <div className="relative w-full max-w-4xl transform rotate-y-[-2deg] hover:rotate-y-0 transition-transform duration-700 ease-out hidden lg:block group cursor-pointer" onClick={() => setIsModalOpen(true)}>
                {/* 3D Mockup Container matching VSL */}
                <div className="bg-dark/80 p-4 rounded-[2rem] border border-white/10 shadow-2xl backdrop-blur-xl relative">
@@ -122,15 +122,15 @@ const OptinPage = () => {
                </div>
             </div>
             {/* Mobile Fallback */}
-            <div className="lg:hidden w-full max-w-2xl bg-dark/80 p-2 md:p-4 rounded-[1.5rem] border border-white/10 shadow-2xl backdrop-blur-xl relative cursor-pointer" onClick={() => setIsModalOpen(true)}>
+            <div className="lg:hidden w-full max-w-xs sm:max-w-md bg-dark/80 p-2 rounded-[1.25rem] border border-white/10 shadow-2xl backdrop-blur-xl relative cursor-pointer" onClick={() => setIsModalOpen(true)}>
                 <div className="absolute -inset-4 bg-primary/20 blur-[50px] rounded-full z-[-1]"></div>
-                <div className="aspect-[16/9] bg-black rounded-[1rem] overflow-hidden relative">
+                <div className="aspect-[16/9] bg-black rounded-[0.75rem] overflow-hidden relative">
                    <img src={LAPTOP_GLOW_IMG} className="absolute inset-0 w-full h-full object-cover opacity-50" alt="Course preview" />
                    <div className="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
-                   <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center bg-black/40 backdrop-blur-sm">
-                      <Lock className="w-12 h-12 text-accent mb-4 drop-shadow-[0_0_20px_rgba(74,222,128,0.8)]" />
-                      <h3 className="text-white font-black text-2xl uppercase tracking-tighter mb-2">Training Locked</h3>
-                      <div className="text-white/80 font-serif italic text-sm">Tap to unlock</div>
+                   <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-center bg-black/40 backdrop-blur-sm">
+                      <Lock className="w-8 h-8 text-accent mb-2 drop-shadow-[0_0_20px_rgba(74,222,128,0.8)]" />
+                      <h3 className="text-white font-black text-lg uppercase tracking-tighter mb-1">Training Locked</h3>
+                      <div className="text-white/80 font-serif italic text-xs">Tap to unlock</div>
                    </div>
                 </div>
             </div>

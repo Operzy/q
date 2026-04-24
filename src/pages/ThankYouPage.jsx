@@ -18,16 +18,16 @@ const ThankYouPage = () => {
       
       {/* Top Banner */}
       <div className="bg-primary/20 border-b border-primary/30 w-full sticky top-0 z-50 backdrop-blur-md">
-        <div className="container mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-          <div className="flex items-center gap-2 text-white font-bold tracking-wide text-sm md:text-base">
-            <Mail className="w-5 h-5 text-accent" />
-            Thank you! The Mini-Course Has Been Emailed to You!
+        <div className="container mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-center text-center gap-3 md:gap-6">
+          <div className="flex items-center justify-center gap-2 text-white font-bold tracking-wide text-xs sm:text-sm md:text-base">
+            <Mail className="w-4 h-4 md:w-5 md:h-5 text-accent shrink-0" />
+            <span>Thank you! The Mini-Course Has Been Emailed to You!</span>
           </div>
           <a
             href="https://malleable-breeze-a9f.notion.site/Start-Here-Watch-this-first-2e82dbe319c08033875bd5e62c11d328"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-accent/10 border border-accent text-accent px-6 py-2 rounded-lg font-bold text-sm hover:bg-accent hover:text-dark transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(74,222,128,0.2)]"
+            className="bg-accent/10 border border-accent text-accent px-5 md:px-6 py-2 rounded-lg font-bold text-xs md:text-sm hover:bg-accent hover:text-dark transition-colors inline-flex items-center gap-2 shadow-[0_0_15px_rgba(74,222,128,0.2)] shrink-0"
           >
             <PlayCircle className="w-4 h-4" /> Access Mini-Course
           </a>
