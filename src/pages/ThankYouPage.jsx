@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Lock, Mail, PlayCircle } from 'lucide-react';
+import { Mail, PlayCircle } from 'lucide-react';
 
 const LOGO_URL = "/logo-CIo0yBvo.png";
 
@@ -44,31 +44,27 @@ const ThankYouPage = () => {
           </h1>
         </div>
 
-        {/* Locked Course Preview (matches mini-course opt-in visual) */}
+        {/* Expert Portrait */}
         <div className="w-full max-w-4xl mb-16 flex justify-center">
-           <a
-              href="https://malleable-breeze-a9f.notion.site/Start-Here-Watch-this-first-2e82dbe319c08033875bd5e62c11d328"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative w-full group cursor-pointer block"
-           >
+           <div className="relative w-full">
               <div className="bg-dark/80 p-2 md:p-4 rounded-[1.5rem] md:rounded-[2rem] border border-white/10 shadow-2xl backdrop-blur-xl relative">
-                 <div className="absolute -inset-4 bg-primary/20 blur-[80px] rounded-full z-[-1] opacity-50 group-hover:opacity-100 transition-opacity duration-700"></div>
+                 <div className="absolute -inset-4 bg-primary/20 blur-[80px] rounded-full z-[-1] opacity-50"></div>
 
                  <div className="aspect-[16/9] bg-black rounded-[1rem] overflow-hidden relative">
-                    <img src="/coach-training-bg.png" className="absolute inset-0 w-full h-full object-cover opacity-50" alt="Course preview" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-dark to-dark/40"></div>
+                    <img src="/coach-training-bg.png" className="absolute inset-0 w-full h-full object-cover" alt="Funding experts" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent"></div>
 
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-8 text-center bg-black/40 backdrop-blur-sm group-hover:bg-black/20 transition-colors duration-500">
-                       <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-accent text-dark flex items-center justify-center mb-4 md:mb-6 shadow-[0_0_50px_rgba(74,222,128,0.5)] transform scale-110 group-hover:scale-125 transition-transform duration-500">
-                          <Lock className="w-8 h-8 md:w-10 md:h-10" />
+                    <div className="absolute bottom-4 left-4 right-4 md:bottom-8 md:left-8 md:right-8">
+                       <div className="bg-white/10 backdrop-blur-md border border-white/20 p-4 md:p-6 rounded-xl max-w-md">
+                          <div className="text-accent font-mono text-[10px] md:text-xs mb-2 uppercase tracking-widest flex items-center gap-2">
+                             <span className="w-1.5 h-1.5 bg-accent rounded-full animate-pulse"></span> Meet Your Funding Experts
+                          </div>
+                          <h4 className="text-white font-bold text-base md:text-xl leading-tight">Real guidance from the team that's helped founders secure the capital to grow.</h4>
                        </div>
-                       <h3 className="text-white font-sans font-black text-2xl md:text-5xl uppercase tracking-tighter mb-2 md:mb-4 leading-tight group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all">Video Training Locked</h3>
-                       <div className="text-white/80 font-serif italic text-base md:text-2xl group-hover:text-white transition-colors">Click to unlock the blueprint.</div>
                     </div>
                  </div>
               </div>
-           </a>
+           </div>
         </div>
 
         {/* Clear Path Box */}
