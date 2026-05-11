@@ -345,30 +345,6 @@ const App = () => {
         </div>
       </section>
 
-      {/* Pricing / Booking CTA */}
-      <section id="book" className="py-24 bg-dark text-background text-center">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-4xl md:text-6xl font-bold font-sans mb-6">Ready to Run the Stack?</h2>
-          <p className="text-xl text-white/70 mb-10 font-sans font-light">Stop wasting inquiries. Start landing approvals with a system engineered for outcomes.</p>
-
-          <div className="bg-primary/20 border border-accent/20 rounded-[3rem] p-10 backdrop-blur-md mb-12 transform hover:-translate-y-2 transition-transform duration-500">
-            <div className="text-accent font-mono text-sm tracking-widest uppercase mb-4">Beta Offer</div>
-            <h3 className="text-3xl font-bold mb-4">The Capital Stack System™</h3>
-            <ul className="text-left max-w-md mx-auto space-y-4 mb-8 text-white/80">
-              <li className="flex items-start gap-3"><CheckCircle2 className="w-6 h-6 text-accent shrink-0" /> Capital Stack Score & Readiness Tier</li>
-              <li className="flex items-start gap-3"><CheckCircle2 className="w-6 h-6 text-accent shrink-0" /> Step-by-Step Stack Plan™ Matrix</li>
-              <li className="flex items-start gap-3"><CheckCircle2 className="w-6 h-6 text-accent shrink-0" /> Underwriter-Ready Packet Checking</li>
-              <li className="flex items-start gap-3"><CheckCircle2 className="w-6 h-6 text-accent shrink-0" /> Private Client Execution Portal</li>
-            </ul>
-            <p className="text-4xl font-serif font-bold text-white mb-8">$2,500</p>
-            <button onClick={(e) => { e.preventDefault(); setIsQuizOpen(true); }} className="btn-magnetic bg-accent text-dark px-10 py-5 text-xl w-full sm:w-auto shadow-[0_0_40px_rgba(74,222,128,0.2)]">
-              <span className="btn-bg bg-white"></span>
-              <span className="relative z-10 font-bold group-hover:text-primary transition-colors cursor-pointer">BOOK STRATEGY SESSION NOW</span>
-            </button>
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
       <footer className="bg-[#05050A] pt-16 pb-8 px-4 border-t border-white/5 relative z-20">
         <div className="container mx-auto max-w-6xl grid md:grid-cols-4 gap-8 mb-12 text-white/60">
