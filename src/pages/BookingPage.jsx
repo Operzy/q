@@ -30,14 +30,9 @@ const BookingPage = () => {
         </div>
 
         {/* Headline */}
-        <h1 className="text-[#1f4d2e] font-extrabold text-[2rem] sm:text-[2.6rem] md:text-[3.1rem] leading-[1.1] tracking-[-0.03em] mb-6 md:mb-7 max-w-[960px] mx-auto">
-          Secure Your Strategy Session
+        <h1 className="text-[#1f4d2e] font-extrabold text-[2rem] sm:text-[2.6rem] md:text-[3.1rem] leading-[1.1] tracking-[-0.03em] mb-8 md:mb-10 max-w-[960px] mx-auto">
+          Book Your Strategy Session Below
         </h1>
-
-        {/* Subheadline */}
-        <p className="text-[17px] md:text-[20px] text-[#3a3a3a] leading-[1.55] max-w-[760px] mx-auto mb-9 md:mb-11">
-          Select a time below to map out your <span className="font-bold text-dark">Custom Funding Blueprint</span> with our lead strategists.
-        </p>
 
         {/* LeadConnector Booking Embed */}
         <div className="bg-white rounded-xl md:rounded-2xl ring-1 ring-black/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.25)] p-2 md:p-6 text-left">
