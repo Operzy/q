@@ -15,29 +15,74 @@ const optionClass = (selected) =>
 const inputClass =
   "w-full bg-white border border-gray-300 text-gray-900 rounded-xl py-4 px-5 font-sans text-lg focus:outline-none focus:border-[#2f6b41] transition-all placeholder:text-gray-400";
 
+// Steps 1-4 are single-choice and auto-advance; steps 5-7 collect contact info.
+const CHOICE_STEPS = [
+  {
+    key: 'funding',
+    question: 'How much funding are you looking to secure?',
+    options: ["Under 50K", "$50K-$100K", "$100K-$200K", "200K+"],
+  },
+  {
+    key: 'credit',
+    question: 'What is your estimated personal credit score?',
+    options: ["Below 620", "620-679", "680-699", "700-749", "750+"],
+  },
+  {
+    key: 'negatives',
+    question: 'Do you have any negative marks in your credit profile?',
+    options: ["No I do not", "I do but they will be removed within 30 days", "Late Payments", "Repossessions", "Bankruptcy", "Collections"],
+  },
+  {
+    key: 'cardLimits',
+    question: 'Roughly how much in total credit cards do you have?',
+    hint: '(Combined total credit spending limits)',
+    options: ["I don't have any personal credit cards", "$5k or less", "$5k-$15k", "$15k-$30k", "$30k-$50k", "More than 50K"],
+  },
+];
+
+const TOTAL_STEPS = CHOICE_STEPS.length + 3;
+
 const VSLPage = () => {
   const navigate = useNavigate();
   const [isQuizOpen, setIsQuizOpen] = useState(false);
   const [step, setStep] = useState(1);
-  const [formState, setFormState] = useState({ funding: "", credit: "", name: "", email: "", phone: "" });
+  const [formState, setFormState] = useState({
+    funding: "", credit: "", negatives: "", cardLimits: "",
+    firstName: "", lastName: "", email: "", phone: "",
+  });
+
+  const choiceIndex = step - 1;
+  const isChoiceStep = choiceIndex < CHOICE_STEPS.length;
+  const nameStep = CHOICE_STEPS.length + 1;
+  const emailStep = CHOICE_STEPS.length + 2;
+  const phoneStep = CHOICE_STEPS.length + 3;
 
   const stepIncomplete =
-    (step === 1 && !formState.funding) ||
-    (step === 2 && !formState.credit) ||
-    (step === 3 && (!formState.name || !formState.email || !formState.phone));
+    (isChoiceStep && !formState[CHOICE_STEPS[choiceIndex].key]) ||
+    (step === nameStep && (!formState.firstName.trim() || !formState.lastName.trim())) ||
+    (step === emailStep && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.email.trim())) ||
+    (step === phoneStep && formState.phone.replace(/\D/g, '').length < 10);
+
+  const selectChoice = (key, value) => {
+    setFormState({ ...formState, [key]: value });
+    setTimeout(() => setStep(s => s + 1), 180);
+  };
 
   const handleNext = () => {
-    if (step === 1 && formState.funding) setStep(2);
-    else if (step === 2 && formState.credit) setStep(3);
-    else if (step === 3 && formState.name && formState.email && formState.phone) {
-      setIsQuizOpen(false);
-      if (formState.credit === "Below 620" || formState.credit === "620-679") {
-        navigate('/credit-book');
-      } else {
-        navigate('/book');
-      }
+    if (stepIncomplete) return;
+    if (step < phoneStep) {
+      setStep(step + 1);
+      return;
+    }
+    setIsQuizOpen(false);
+    if (formState.credit === "Below 620" || formState.credit === "620-679") {
+      navigate('/credit-book');
+    } else {
+      navigate('/book');
     }
   };
+
+  const onEnter = (e) => { if (e.key === 'Enter') handleNext(); };
 
   return (
     <div className="min-h-screen bg-[#fcf6f4] bg-[radial-gradient(ellipse_at_top,rgba(63,125,79,0.07),transparent_60%)] font-sans text-dark flex flex-col">
@@ -112,59 +157,79 @@ const VSLPage = () => {
           <div className="absolute inset-0 bg-black/60" onClick={() => setIsQuizOpen(false)}></div>
 
           <div className="relative bg-[#fcf6f4] rounded-2xl w-full max-w-xl shadow-2xl overflow-hidden animate-[scaleIn_0.3s_ease-out]">
-            <button onClick={() => setIsQuizOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 transition-colors rounded-full p-2">
+            <button onClick={() => setIsQuizOpen(false)} className="absolute top-4 right-4 z-10 text-gray-400 hover:text-gray-700 transition-colors rounded-full p-2">
               <XIcon className="w-5 h-5" />
             </button>
 
-            <div className="px-6 md:px-10 pt-10 pb-8">
-              <p className="text-xs tracking-widest text-[#2f6b41] uppercase font-bold text-center mb-6">Step {step} of 3</p>
+            {/* Progress */}
+            <div className="h-1.5 bg-gray-200">
+              <div className="h-full bg-[#2f6b41] transition-all duration-300" style={{ width: `${(step / TOTAL_STEPS) * 100}%` }}></div>
+            </div>
 
-              {step === 1 && (
+            <div className="px-6 md:px-10 pt-8 pb-8">
+              <p className="text-xs tracking-widest text-[#2f6b41] uppercase font-bold text-center mb-6">Step {step} of {TOTAL_STEPS}</p>
+
+              {isChoiceStep && (() => {
+                const q = CHOICE_STEPS[choiceIndex];
+                const twoCol = q.options.every(o => o.length <= 14);
+                return (
+                  <div key={q.key}>
+                    <h4 className="text-xl md:text-2xl font-bold text-[#2f6b41] mb-2 text-center">{q.question}</h4>
+                    {q.hint ? (
+                      <p className="text-sm text-gray-500 text-center mb-6">{q.hint}</p>
+                    ) : (
+                      <div className="mb-6"></div>
+                    )}
+                    <div className={`grid grid-cols-1 ${twoCol ? 'sm:grid-cols-2' : ''} gap-3`}>
+                      {q.options.map(opt => (
+                        <button key={opt} onClick={() => selectChoice(q.key, opt)} className={optionClass(formState[q.key] === opt)}>
+                          <span className="font-bold">{opt}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })()}
+
+              {step === nameStep && (
                 <div>
-                  <h4 className="text-xl md:text-2xl font-bold text-[#2f6b41] mb-6 text-center">How much funding are you looking to secure?</h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {["Under 50K", "$50K-$100K", "$100K-$200K", "200K+"].map(opt => (
-                      <button key={opt} onClick={() => { setFormState({ ...formState, funding: opt }); setTimeout(() => setStep(2), 180); }} className={optionClass(formState.funding === opt)}>
-                        <span className="font-bold">{opt}</span>
-                      </button>
-                    ))}
+                  <h4 className="text-xl md:text-2xl font-bold text-[#2f6b41] mb-6 text-center">What is your name?</h4>
+                  <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                    <input type="text" placeholder="First Name" autoFocus value={formState.firstName} onChange={(e) => setFormState({ ...formState, firstName: e.target.value })} onKeyDown={onEnter} className={inputClass} />
+                    <input type="text" placeholder="Last Name" value={formState.lastName} onChange={(e) => setFormState({ ...formState, lastName: e.target.value })} onKeyDown={onEnter} className={inputClass} />
                   </div>
                 </div>
               )}
 
-              {step === 2 && (
+              {step === emailStep && (
                 <div>
-                  <h4 className="text-xl md:text-2xl font-bold text-[#2f6b41] mb-6 text-center">What is your estimated personal credit score?</h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {["Below 620", "620-679", "680-699", "700-749", "750+"].map(opt => (
-                      <button key={opt} onClick={() => { setFormState({ ...formState, credit: opt }); setTimeout(() => setStep(3), 180); }} className={optionClass(formState.credit === opt)}>
-                        <span className="font-bold">{opt}</span>
-                      </button>
-                    ))}
+                  <h4 className="text-xl md:text-2xl font-bold text-[#2f6b41] mb-6 text-center">What is your best email address?</h4>
+                  <div className="max-w-sm mx-auto">
+                    <input type="email" placeholder="Email Address" autoFocus value={formState.email} onChange={(e) => setFormState({ ...formState, email: e.target.value })} onKeyDown={onEnter} className={inputClass} />
                   </div>
                 </div>
               )}
 
-              {step === 3 && (
+              {step === phoneStep && (
                 <div>
-                  <h4 className="text-xl md:text-2xl font-bold text-[#2f6b41] mb-6 text-center">Almost there! Where should we send your results?</h4>
-                  <div className="flex flex-col gap-3 max-w-sm mx-auto">
-                    <input type="text" placeholder="Full Name" value={formState.name} onChange={(e) => setFormState({ ...formState, name: e.target.value })} className={inputClass} />
-                    <input type="email" placeholder="Email Address" value={formState.email} onChange={(e) => setFormState({ ...formState, email: e.target.value })} className={inputClass} />
-                    <input type="tel" placeholder="Phone Number" value={formState.phone} onChange={(e) => setFormState({ ...formState, phone: e.target.value })} className={inputClass} />
+                  <h4 className="text-xl md:text-2xl font-bold text-[#2f6b41] mb-6 text-center">What is your phone number?</h4>
+                  <div className="max-w-sm mx-auto">
+                    <input type="tel" placeholder="Phone Number" autoFocus value={formState.phone} onChange={(e) => setFormState({ ...formState, phone: e.target.value })} onKeyDown={onEnter} className={inputClass} />
                   </div>
                 </div>
               )}
             </div>
 
             <div className="border-t border-gray-200 px-6 md:px-10 py-4 flex justify-between items-center">
-                {step > 1 ? (
-                  <button onClick={() => setStep(step - 1)} className="text-gray-500 hover:text-gray-800 flex items-center gap-2 text-sm font-semibold transition-colors">
-                    <ArrowLeft className="w-4 h-4" /> Back
-                  </button>
-                ) : <div></div>}
+              {step > 1 ? (
+                <button onClick={() => setStep(step - 1)} className="text-gray-500 hover:text-gray-800 flex items-center gap-2 text-sm font-semibold transition-colors">
+                  <ArrowLeft className="w-4 h-4" /> Back
+                </button>
+              ) : <div></div>}
 
-                {step === 3 ? (
+              {isChoiceStep ? (
+                <span className="text-sm text-gray-400">Select an option to continue</span>
+              ) : (
                 <button
                   onClick={handleNext}
                   disabled={stepIncomplete}
@@ -172,12 +237,10 @@ const VSLPage = () => {
                     stepIncomplete ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-[#2f6b41] text-white hover:bg-[#275a37]'
                   }`}
                 >
-                  Continue <ArrowRight className="w-4 h-4" />
+                  {step === phoneStep ? 'See My Results' : 'Continue'} <ArrowRight className="w-4 h-4" />
                 </button>
-                ) : (
-                  <span className="text-sm text-gray-400">Select an option to continue</span>
-                )}
-              </div>
+              )}
+            </div>
           </div>
         </div>
       )}
