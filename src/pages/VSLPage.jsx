@@ -96,12 +96,12 @@ const VSLPage = () => {
         <img src={LOGO_URL} alt="My Funding Approved" className="h-12 md:h-16 w-auto mx-auto mb-8 md:mb-10" />
 
         {/* Attention pill */}
-        <div className="inline-flex items-center gap-2.5 bg-[#fdecea] border border-[#f3b6b1] text-[#c62828] rounded-full pl-3 pr-5 py-2 mb-6 shadow-[0_4px_14px_-6px_rgba(198,40,40,0.35)]">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e53935] opacity-60"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#e53935]"></span>
-          </span>
+        <div className="inline-block bg-[#fdecea] border border-[#f3b6b1] text-[#c62828] rounded-full px-4 sm:px-5 py-2 mb-6 shadow-[0_4px_14px_-6px_rgba(198,40,40,0.35)] max-w-full">
           <span className="text-[12px] sm:text-[13px] md:text-[15px] font-bold tracking-wide leading-snug">
+            <span className="relative inline-flex h-2.5 w-2.5 align-middle mr-2 -mt-0.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e53935] opacity-60"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#e53935]"></span>
+            </span>
             <span className="uppercase">Attention:</span> Entrepreneurs &amp; Investors With 650+ Credit Scores
           </span>
         </div>
@@ -133,7 +133,7 @@ const VSLPage = () => {
         <div className="mt-8 md:mt-10">
           <button
             onClick={() => setIsQuizOpen(true)}
-            className="group inline-flex items-center justify-center gap-2.5 bg-[#2f6b41] hover:bg-[#275a37] text-white font-bold text-lg md:text-xl px-10 md:px-12 py-4.5 md:py-5 rounded-xl shadow-[0_10px_30px_-8px_rgba(47,107,65,0.6)] hover:shadow-[0_14px_36px_-8px_rgba(47,107,65,0.7)] hover:-translate-y-0.5 transition-all duration-200 w-full sm:w-auto"
+            className="group inline-flex items-center justify-center gap-2.5 bg-[#2f6b41] hover:bg-[#275a37] text-white font-bold text-lg md:text-xl px-10 md:px-12 py-5 rounded-xl shadow-[0_10px_30px_-8px_rgba(47,107,65,0.6)] hover:shadow-[0_14px_36px_-8px_rgba(47,107,65,0.7)] hover:-translate-y-0.5 transition-all duration-200 w-full sm:w-auto"
           >
             See If You Qualify
             <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-0.5" />
