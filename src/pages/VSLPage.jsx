@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { X as XIcon, ArrowRight, ArrowLeft } from 'lucide-react';
 
@@ -6,7 +6,7 @@ const LOGO_URL = "/mfa-logo.webp";
 const WISTIA_MEDIA_ID = "xerfwv6gq1";
 
 const optionClass = (selected) =>
-  `relative p-5 rounded-xl border text-left font-sans transition-all duration-200 ${
+  `relative p-4 md:p-5 rounded-xl border text-left font-sans transition-all duration-200 ${
     selected
       ? 'bg-[#2f6b41]/10 border-[#2f6b41] text-[#2f6b41]'
       : 'bg-white border-gray-200 text-gray-800 hover:border-[#2f6b41]/50'
@@ -84,6 +84,11 @@ const VSLPage = () => {
 
   const onEnter = (e) => { if (e.key === 'Enter') handleNext(); };
 
+  useEffect(() => {
+    document.body.style.overflow = isQuizOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isQuizOpen]);
+
   return (
     <div className="min-h-screen bg-[#fcf6f4] bg-[radial-gradient(ellipse_at_top,rgba(63,125,79,0.07),transparent_60%)] font-sans text-dark flex flex-col">
       <main className="flex-1 w-full max-w-[960px] mx-auto px-4 sm:px-6 pt-8 md:pt-12 pb-16 text-center">
@@ -96,14 +101,14 @@ const VSLPage = () => {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e53935] opacity-60"></span>
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#e53935]"></span>
           </span>
-          <span className="text-[13px] md:text-[15px] font-bold tracking-wide">
+          <span className="text-[12px] sm:text-[13px] md:text-[15px] font-bold tracking-wide leading-snug">
             <span className="uppercase">Attention:</span> Entrepreneurs &amp; Investors With 650+ Credit Scores
           </span>
         </div>
 
         {/* Headline */}
         <h1 className="text-[#1f4d2e] font-extrabold text-[2rem] sm:text-[2.6rem] md:text-[3.1rem] leading-[1.1] tracking-[-0.03em] mb-6 md:mb-7 max-w-[960px] mx-auto">
-          We will get you up to $250,000 in<br className="hidden md:block" /> 0% interest business funding
+          We will get you up to $250,000 in<br className="hidden md:block" /> <span className="whitespace-nowrap">0% interest</span> business funding
         </h1>
 
         {/* Subheadline */}
@@ -156,7 +161,7 @@ const VSLPage = () => {
         <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/60" onClick={() => setIsQuizOpen(false)}></div>
 
-          <div className="relative bg-[#fcf6f4] rounded-2xl w-full max-w-xl shadow-2xl overflow-hidden animate-[scaleIn_0.3s_ease-out]">
+          <div className="relative bg-[#fcf6f4] rounded-2xl w-full max-w-xl max-h-[92dvh] shadow-2xl overflow-hidden flex flex-col animate-[scaleIn_0.3s_ease-out]">
             <button onClick={() => setIsQuizOpen(false)} className="absolute top-4 right-4 z-10 text-gray-400 hover:text-gray-700 transition-colors rounded-full p-2">
               <XIcon className="w-5 h-5" />
             </button>
@@ -166,7 +171,7 @@ const VSLPage = () => {
               <div className="h-full bg-[#2f6b41] transition-all duration-300" style={{ width: `${(step / TOTAL_STEPS) * 100}%` }}></div>
             </div>
 
-            <div className="px-6 md:px-10 pt-8 pb-8">
+            <div className="px-5 sm:px-6 md:px-10 pt-7 md:pt-8 pb-6 md:pb-8 overflow-y-auto">
               <p className="text-xs tracking-widest text-[#2f6b41] uppercase font-bold text-center mb-6">Step {step} of {TOTAL_STEPS}</p>
 
               {isChoiceStep && (() => {
@@ -174,13 +179,13 @@ const VSLPage = () => {
                 const twoCol = q.options.every(o => o.length <= 14);
                 return (
                   <div key={q.key}>
-                    <h4 className="text-xl md:text-2xl font-bold text-[#2f6b41] mb-2 text-center">{q.question}</h4>
+                    <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-[#2f6b41] mb-2 text-center leading-snug">{q.question}</h4>
                     {q.hint ? (
                       <p className="text-sm text-gray-500 text-center mb-6">{q.hint}</p>
                     ) : (
                       <div className="mb-6"></div>
                     )}
-                    <div className={`grid grid-cols-1 ${twoCol ? 'sm:grid-cols-2' : ''} gap-3`}>
+                    <div className={`grid grid-cols-1 ${twoCol ? 'sm:grid-cols-2' : ''} gap-2.5 md:gap-3`}>
                       {q.options.map(opt => (
                         <button key={opt} onClick={() => selectChoice(q.key, opt)} className={optionClass(formState[q.key] === opt)}>
                           <span className="font-bold">{opt}</span>
@@ -220,7 +225,7 @@ const VSLPage = () => {
               )}
             </div>
 
-            <div className="border-t border-gray-200 px-6 md:px-10 py-4 flex justify-between items-center">
+            <div className="border-t border-gray-200 px-5 sm:px-6 md:px-10 py-3.5 md:py-4 flex justify-between items-center shrink-0 bg-[#fcf6f4]">
               {step > 1 ? (
                 <button onClick={() => setStep(step - 1)} className="text-gray-500 hover:text-gray-800 flex items-center gap-2 text-sm font-semibold transition-colors">
                   <ArrowLeft className="w-4 h-4" /> Back
