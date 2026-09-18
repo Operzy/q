@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { AlertCircle, TrendingUp } from 'lucide-react';
 
 const LOGO_URL = "/mfa-logo.webp";
 
@@ -22,15 +23,28 @@ const CreditBookingPage = () => {
         {/* Logo */}
         <img src={LOGO_URL} alt="My Funding Approved" className="h-12 md:h-16 w-auto mx-auto mb-8 md:mb-10" />
 
+        {/* Status pill */}
+        <div className="inline-flex items-center gap-2.5 bg-[#fff3cd] border border-[#f0d078] text-[#8a5a12] rounded-full pl-3 pr-5 py-2 mb-6 shadow-[0_4px_14px_-6px_rgba(180,120,0,0.4)]">
+          <TrendingUp className="w-4 h-4" strokeWidth={2.5} />
+          <span className="text-[13px] md:text-[15px] font-bold tracking-wide uppercase">Alternative Pathway Unlocked</span>
+        </div>
+
         {/* Headline */}
-        <h1 className="text-[#1f4d2e] font-extrabold text-[2rem] sm:text-[2.6rem] md:text-[3.1rem] leading-[1.1] tracking-[-0.03em] mb-5 md:mb-6 max-w-[960px] mx-auto">
+        <h1 className="text-[#1f4d2e] font-extrabold text-[2rem] sm:text-[2.6rem] md:text-[3.1rem] leading-[1.1] tracking-[-0.03em] mb-6 md:mb-8 max-w-[960px] mx-auto">
           You Qualify for Credit to Capital
         </h1>
 
-        {/* Subheadline */}
-        <p className="text-[17px] md:text-[20px] text-[#3a3a3a] leading-[1.55] max-w-[720px] mx-auto mb-8 md:mb-10">
-          Our funding program requires a <span className="font-bold text-dark">650+ credit score</span>. Credit to Capital is built to raise your score so you can qualify. Book your call below to get started.
-        </p>
+        {/* Notice */}
+        <div className="mb-8 md:mb-10 bg-[#fff7e6] border border-[#f3d9a4] rounded-xl md:rounded-2xl p-5 md:p-6 text-left max-w-[820px] mx-auto shadow-[0_10px_30px_-15px_rgba(180,120,0,0.25)]">
+          <div className="flex flex-col sm:flex-row items-start gap-4">
+            <div className="w-11 h-11 bg-[#fdebc8] rounded-full flex items-center justify-center shrink-0 border border-[#f3d9a4]">
+              <AlertCircle className="w-6 h-6 text-[#b7791f]" strokeWidth={2.5} />
+            </div>
+            <p className="text-[#8a5a12] text-[15px] md:text-[17px] leading-relaxed">
+              Our funding program requires a <span className="font-bold">650+ credit score</span>. Credit to Capital is built to raise your score so you can qualify. Book your call below to get started.
+            </p>
+          </div>
+        </div>
 
         {/* LeadConnector Embed */}
         <div className="bg-white rounded-xl md:rounded-2xl ring-1 ring-black/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.25)] p-2 md:p-6 text-left">
