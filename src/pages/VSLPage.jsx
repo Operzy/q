@@ -96,12 +96,12 @@ const VSLPage = () => {
         <img src={LOGO_URL} alt="My Funding Approved" className="h-12 md:h-16 w-auto mx-auto mb-8 md:mb-10" />
 
         {/* Attention pill */}
-        <div className="inline-block bg-[#fdecea] border border-[#f3b6b1] text-[#c62828] rounded-full px-3 sm:px-5 py-2 mb-6 shadow-[0_4px_14px_-6px_rgba(198,40,40,0.35)] max-w-full whitespace-nowrap">
-          <span className="text-[clamp(8.5px,2.55vw,13px)] md:text-[15px] font-bold tracking-tight sm:tracking-wide leading-snug">
-            <span className="relative inline-flex h-2 w-2 sm:h-2.5 sm:w-2.5 align-middle mr-1.5 sm:mr-2 -mt-0.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e53935] opacity-60"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#e53935]"></span>
-            </span>
+        <div className="inline-flex items-center gap-1.5 sm:gap-2.5 bg-[#fdecea] border border-[#f3b6b1] text-[#c62828] rounded-full pl-3 pr-3.5 sm:pl-3.5 sm:pr-5 py-2 mb-6 shadow-[0_4px_14px_-6px_rgba(198,40,40,0.35)] max-w-full whitespace-nowrap">
+          <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5 shrink-0">
+            <span className="animate-ping absolute inset-0 rounded-full bg-[#e53935] opacity-60"></span>
+            <span className="relative rounded-full h-full w-full bg-[#e53935]"></span>
+          </span>
+          <span className="text-[clamp(8.5px,2.55vw,13px)] md:text-[15px] font-bold tracking-tight sm:tracking-wide leading-none">
             <span className="uppercase">Attention:</span> Entrepreneurs &amp; Investors With 650+ Credit Scores
           </span>
         </div>
