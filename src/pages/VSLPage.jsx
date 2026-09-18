@@ -25,7 +25,7 @@ const CHOICE_STEPS = [
   {
     key: 'credit',
     question: 'What is your estimated personal credit score?',
-    options: ["Below 620", "620-679", "680-699", "700-749", "750+"],
+    options: ["Below 600", "600-649", "650-699", "700-749", "750+"],
   },
   {
     key: 'negatives',
@@ -75,7 +75,7 @@ const VSLPage = () => {
       return;
     }
     setIsQuizOpen(false);
-    if (formState.credit === "Below 620" || formState.credit === "620-679") {
+    if (formState.credit === "Below 600" || formState.credit === "600-649") {
       navigate('/credit-book');
     } else {
       navigate('/book');
