@@ -3,6 +3,35 @@ import { useNavigate } from 'react-router-dom';
 import { X as XIcon, ArrowRight, ArrowLeft } from 'lucide-react';
 
 const LOGO_URL = "/mfa-logo.webp";
+const APPLICATION_WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/hmm2Awyfx0G2wLjFEr3x/webhook-trigger/83071db9-edd9-46a4-b639-7fb411496e17";
+
+// Fire-and-forget POST of the full application to the GHL inbound webhook.
+// keepalive lets the request finish even though we navigate away immediately.
+const sendApplication = (formState, route) => {
+  const params = new URLSearchParams(window.location.search);
+  let storedUtms = {};
+  try { storedUtms = JSON.parse(sessionStorage.getItem('utms') || '{}'); } catch { /* ignore */ }
+
+  const payload = {
+    ...formState,
+    fullName: `${formState.firstName} ${formState.lastName}`.trim(),
+    qualified: route === '/book',
+    routedTo: route,
+    utm_source: params.get('utm_source') || storedUtms.utm_source || '',
+    utm_medium: params.get('utm_medium') || storedUtms.utm_medium || '',
+    utm_campaign: params.get('utm_campaign') || storedUtms.utm_campaign || '',
+    pageUrl: window.location.href,
+    referrer: document.referrer,
+    submittedAt: new Date().toISOString(),
+  };
+
+  fetch(APPLICATION_WEBHOOK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+    keepalive: true,
+  }).catch((err) => console.error('Application webhook failed', err));
+};
 const WISTIA_MEDIA_ID = "xerfwv6gq1";
 
 const optionClass = (selected) =>
@@ -75,11 +104,11 @@ const VSLPage = () => {
       return;
     }
     setIsQuizOpen(false);
-    if (formState.credit === "Below 600" || formState.credit === "600-649" || formState.credit === "650-699") {
-      navigate('/credit-book');
-    } else {
-      navigate('/book');
-    }
+    const needsCreditRepair =
+      formState.credit === "Below 600" || formState.credit === "600-649" || formState.credit === "650-699";
+    const route = needsCreditRepair ? '/credit-book' : '/book';
+    sendApplication(formState, route);
+    navigate(route);
   };
 
   const onEnter = (e) => { if (e.key === 'Enter') handleNext(); };
