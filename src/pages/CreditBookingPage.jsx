@@ -41,7 +41,7 @@ const CreditBookingPage = () => {
               <AlertCircle className="w-6 h-6 text-[#b7791f]" strokeWidth={2.5} />
             </div>
             <p className="text-[#8a5a12] text-[15px] md:text-[17px] leading-relaxed">
-              Our funding program requires a <span className="font-bold">650+ credit score</span>. Credit to Capital is built to raise your score so you can qualify. Book your call below to get started.
+              Our funding program requires a <span className="font-bold">700+ credit score</span>. Credit to Capital is built to raise your score so you can qualify. Book your call below to get started.
             </p>
           </div>
         </div>

@@ -75,7 +75,7 @@ const VSLPage = () => {
       return;
     }
     setIsQuizOpen(false);
-    if (formState.credit === "Below 600" || formState.credit === "600-649") {
+    if (formState.credit === "Below 600" || formState.credit === "600-649" || formState.credit === "650-699") {
       navigate('/credit-book');
     } else {
       navigate('/book');
@@ -102,7 +102,7 @@ const VSLPage = () => {
             <span className="relative rounded-full h-full w-full bg-[#e53935]"></span>
           </span>
           <span className="text-[clamp(8.5px,2.55vw,13px)] md:text-[15px] font-bold tracking-tight sm:tracking-wide leading-none">
-            <span className="uppercase">Attention:</span> Entrepreneurs &amp; Investors With 650+ Credit Scores
+            <span className="uppercase">Attention:</span> Entrepreneurs &amp; Investors With 700+ Credit Scores
           </span>
         </div>
 
