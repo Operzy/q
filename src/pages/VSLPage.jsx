@@ -12,9 +12,13 @@ const sendApplication = (formState, route) => {
   let storedUtms = {};
   try { storedUtms = JSON.parse(sessionStorage.getItem('utms') || '{}'); } catch { /* ignore */ }
 
+  // Split the single name field so GHL can map first/last separately.
+  const nameParts = formState.name.trim().split(/\s+/);
   const payload = {
     ...formState,
-    fullName: `${formState.firstName} ${formState.lastName}`.trim(),
+    fullName: formState.name.trim(),
+    firstName: nameParts[0] || '',
+    lastName: nameParts.slice(1).join(' '),
     qualified: route === '/book',
     routedTo: route,
     utm_source: params.get('utm_source') || storedUtms.utm_source || '',
@@ -77,7 +81,7 @@ const VSLPage = () => {
   const [step, setStep] = useState(1);
   const [formState, setFormState] = useState({
     funding: "", credit: "", negatives: "", cardLimits: "",
-    firstName: "", lastName: "", email: "", phone: "",
+    name: "", email: "", phone: "",
   });
 
   const choiceIndex = step - 1;
@@ -88,7 +92,7 @@ const VSLPage = () => {
 
   const stepIncomplete =
     (isChoiceStep && !formState[CHOICE_STEPS[choiceIndex].key]) ||
-    (step === nameStep && (!formState.firstName.trim() || !formState.lastName.trim())) ||
+    (step === nameStep && !formState.name.trim()) ||
     (step === emailStep && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.email.trim())) ||
     (step === phoneStep && formState.phone.replace(/\D/g, '').length < 10);
 
@@ -228,9 +232,8 @@ const VSLPage = () => {
               {step === nameStep && (
                 <div>
                   <h4 className="text-xl md:text-2xl font-bold text-[#2f6b41] mb-6 text-center">What is your name?</h4>
-                  <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                    <input type="text" placeholder="First Name" autoFocus value={formState.firstName} onChange={(e) => setFormState({ ...formState, firstName: e.target.value })} onKeyDown={onEnter} className={inputClass} />
-                    <input type="text" placeholder="Last Name" value={formState.lastName} onChange={(e) => setFormState({ ...formState, lastName: e.target.value })} onKeyDown={onEnter} className={inputClass} />
+                  <div className="max-w-md mx-auto">
+                    <input type="text" placeholder="Full Name" autoFocus value={formState.name} onChange={(e) => setFormState({ ...formState, name: e.target.value })} onKeyDown={onEnter} className={inputClass} />
                   </div>
                 </div>
               )}
