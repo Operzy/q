@@ -6,6 +6,15 @@ const LOGO_URL = "/mfa-logo.webp";
 const BookedPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    // Meta Pixel: count a confirmed booking as a Lead. Guarded with
+    // sessionStorage so a refresh of this page doesn't fire it twice.
+    try {
+      if (window.fbq && !sessionStorage.getItem('mfa_lead_fired')) {
+        window.fbq('track', 'Lead', { content_name: 'Strategy Session Booked' });
+        sessionStorage.setItem('mfa_lead_fired', '1');
+      }
+    } catch { /* ignore storage/pixel errors */ }
   }, []);
 
   return (
