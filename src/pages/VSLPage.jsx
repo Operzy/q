@@ -20,6 +20,7 @@ const sendApplication = (formState, route) => {
     firstName: nameParts[0] || '',
     lastName: nameParts.slice(1).join(' '),
     qualified: route === '/book',
+    status: route === '/book' ? 'Qualified' : 'Unqualified',
     routedTo: route,
     utm_source: params.get('utm_source') || storedUtms.utm_source || '',
     utm_medium: params.get('utm_medium') || storedUtms.utm_medium || '',
